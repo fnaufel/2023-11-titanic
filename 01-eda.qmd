@@ -1,0 +1,419 @@
+---
+title: "Titanic competition: EDA"
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+
+#bibliography: bibliography.bib
+#csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-depth: 3
+    theme: 
+      - journal
+      - _custom.scss
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+---
+
+{{< include _math.qmd >}}
+
+
+# Setup
+
+```{r setup}
+source('_setup.R')
+```
+
+
+# Leitura e limpeza
+
+```{r}
+df <- read_csv(
+  'dados/train.csv'
+)
+```
+
+```{r}
+df %>% glimpse()
+```
+
+## Limpar nomes
+
+```{r}
+df <- df %>% 
+  clean_names() %>% 
+  rename(
+    id = passenger_id,
+    par_ch = parch
+  )
+```
+
+```{r}
+df %>% glimpse()
+```
+
+
+## Converter `survived` para booleano
+
+```{r}
+df <- df %>% 
+  mutate(
+    survived = case_when(
+      survived == 0 ~ FALSE,
+      survived == 1 ~ TRUE
+    )
+  )
+```
+
+```{r}
+df$survived %>% str()
+```
+
+
+## Converter `pclass` para fator ordenado
+
+```{r}
+df <- df %>% 
+  mutate(
+    pclass =  fct_rev(ordered(pclass))
+  )
+```
+
+```{r}
+df$pclass %>% str()
+```
+
+
+## Converter `sex` para fator
+
+```{r}
+df <- df %>% 
+  mutate(
+    sex = as_factor(sex) %>% 
+      fct_relabel(
+        ~case_when(
+          . == 'male' ~ 'M',
+          . == 'female' ~ 'F',
+        )
+      )
+  )
+```
+
+```{r}
+df$sex %>% str()
+```
+
+
+## Converter `embarked` para fator
+
+```{r}
+df <- df %>% 
+  mutate(
+    embarked = as_factor(embarked)
+  )
+```
+
+```{r}
+df$embarked %>% str()
+```
+
+
+## Sumário
+
+```{r}
+df %>% dfSummary() %>% print(method = 'render')
+```
+
+
+# EDA
+
+## Porto de embarque faltante (só 2)
+
+* Imputar S? (Mais comum)
+
+```{r}
+df <- df %>% 
+  mutate(
+    embarked = case_when(
+      is.na(embarked) ~ 'S',
+      TRUE ~ embarked
+    )
+  )
+```
+
+```{r}
+df %>% count(embarked)
+```
+
+
+## Idades faltantes (20%)
+
+* Da documentação:
+
+  > Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
+  
+* Estimar se adulto ou criança usando nome, sobrenome, título, passagem?
+
+```{r}
+df %>% 
+  filter(is.na(age)) %>% 
+  select(name, sib_sp, par_ch, sex, pclass, fare) %>% 
+  arrange(name)
+```
+
+
+## Criar colunas `family` e `title`
+
+```{r}
+df_nomes <- df %>% 
+  select(id, name) %>% 
+  separate_wider_delim(
+    name, 
+    regex(',[ ]*'), 
+    names = c('family', 'rest')
+  ) %>% 
+  separate_wider_delim(
+    rest,
+    '.',
+    names = c('title', 'name'),
+    too_many = 'merge'
+  ) %>% 
+  arrange(family)
+```
+
+```{r}
+df_nomes 
+```
+
+```{r}
+df_nomes %>% 
+  count(title, sort = TRUE)
+```
+
+* Jonkheer (female equivalent: jonkvrouw; French: Écuyer; English: Squire) is an honorific in the Low Countries denoting the lowest rank within the nobility.
+
+```{r}
+df_nomes %>% 
+  count(family, sort = TRUE)
+```
+
+::: {.callout-note}
+
+## Atenção
+
+Pessoas que não têm parentes no conjunto de treino podem ter parentes no conjunto de teste!
+
+Talvez seja melhor confiar nas colunas `par_ch` e `sib_sp`?
+
+:::
+
+```{r}
+df_nomes %>% 
+  count(name, sort = TRUE)
+```
+
+* O que significam os nomes em parênteses?
+
+```{r}
+df %>% 
+  filter(
+    str_detect(name, '[)(]')
+  ) %>% 
+  select(name) %>% 
+  arrange(name)
+```
+
+* Juntar com df:
+
+```{r}
+df_familias <- df %>% 
+  select(-name) %>% 
+  left_join(
+    df_nomes,
+    by = 'id'
+  )
+```
+
+
+## Criar coluna `age_bracket`
+
+* Criança (até 14) ou adulto.
+
+* Usar idade.
+
+* Senão
+
+  * Mrs é adulto.
+
+  * Master é criança.
+
+  * Mr é adulto.
+  
+* Conferir se esta heurística funciona para quem tem idade:
+
+```{r}
+df_com_idade <- df_familias %>% 
+  filter(!is.na(age))
+```
+
+```{r}
+df_com_idade %>% 
+  mutate(
+    ok = case_when(
+      title == 'Mrs' ~ age >= 14,
+      title == 'Mr' ~ age >= 14,
+      title == 'Miss' ~ age < 14,
+      title == 'Dr' ~ age >= 14,
+      TRUE ~ NA
+    )
+  ) %>% 
+  filter(!ok) %>% 
+  select(title, age)
+```
+
+* Visualizando:
+
+```{r}
+bins = seq(0, 80, 5)
+breaks = seq(0, 80, 10)
+
+df_com_idade %>% 
+  filter(title %in% c('Master', 'Miss', 'Mlle', 'Mr', 'Mrs', 'Ms')) %>% 
+  ggplot(aes(x = age)) +
+  geom_histogram(breaks = bins) +
+  scale_x_continuous(breaks = breaks) +
+  facet_wrap(~title) +
+  labs(
+    y = NULL
+  )
+```
+
+* A heurística funciona para Master.
+
+* Funciona para Mr. (com 3 erros):
+
+```{r}
+df_com_idade %>% 
+  filter(title == 'Mr' & age < 15) %>% 
+  select(title, name, family, age)
+```
+
+* Funciona para Mrs. (com 1 erro):
+
+```{r}
+df_com_idade %>% 
+  filter(title == 'Mrs' & age < 15) %>% 
+  select(title, name, family, age)
+```
+
+* Para Miss, a idade é imprevisível. Muitas solteironas?
+
+* Sem idade:
+
+```{r}
+df_sem_idade <- 
+  df_familias %>% 
+  filter(is.na(age))
+```
+
+```{r}
+df_sem_idade %>% 
+  count(title, sort = TRUE)
+```
+
+
+## Tentar prever idade das Miss?
+
+```{r}
+df_misses_com_idade <- 
+  df_com_idade %>% 
+  filter(title == 'Miss') %>% 
+  select(-c(survived, sex, title))
+```
+
+```{r}
+df_misses_com_idade %>% dfSummary() %>% print(method = 'render')
+```
+
+* Split:
+
+```{r}
+misses_split <- df_misses_com_idade %>% 
+  initial_split(strata = age)
+treino <- training(misses_split)
+teste <- testing(misses_split)
+```
+
+* Regressão:
+
+```{r}
+lm_modelo <- 
+  linear_reg() %>% 
+  set_engine('lm')
+```
+
+```{r}
+lm_receita <- recipe(
+  age ~ pclass + par_ch,
+  treino
+) %>% 
+  step_dummy(pclass)
+
+lm_wflow <- 
+  workflow() %>% 
+  add_model(lm_modelo) %>% 
+  add_recipe(lm_receita)
+
+lm_wflow
+```
+
+```{r}
+modelo_lm_fit <- lm_wflow %>% fit(treino)
+```
+
+```{r}
+modelo_lm_fit %>% tidy()
+```
+
+```{r}
+final_lm <- last_fit(lm_wflow, misses_split)
+```
+
+```{r}
+collect_metrics(final_lm)
+```
+
+```{r}
+collect_predictions(final_lm)
+```
+
+```{r}
+extract_fit_engine(final_lm)
+```
+
+
+
+## Cabines faltantes (77%!)
+
+* Ignorar coluna?
+
+
+## O que significa a letra da cabine? 
+
+* Convés?
+
+
+## Pessoas com o mesmo bilhete ou mesma cabine
+
+* Estavam viajando juntas?
+
+* Eram da mesma família?
+
+

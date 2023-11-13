@@ -132,9 +132,7 @@ df %>% dfSummary() %>% print(method = 'render')
 ```
 
 
-# EDA
-
-## Porto de embarque faltante (só 2)
+# Porto de embarque faltante (só 2)
 
 * Imputar S? (Mais comum)
 
@@ -153,7 +151,26 @@ df %>% count(embarked)
 ```
 
 
-## Idades faltantes (20%)
+# Cabines faltantes (77%!)
+
+* Ignorar coluna.
+
+
+## O que significa a letra da cabine? 
+
+* Convés?
+
+* Mas ignorar.
+
+
+# Pessoas com o mesmo bilhete ou mesma cabine
+
+* Estavam viajando juntas?
+
+* Eram da mesma família?
+
+
+# Idades faltantes (20%)
 
 * Da documentação:
 
@@ -169,7 +186,7 @@ df %>%
 ```
 
 
-## Criar colunas `family` e `title`
+# Criar colunas `family` e `title`
 
 ```{r}
 df_nomes <- df %>% 
@@ -242,7 +259,7 @@ df_familias <- df %>%
 ```
 
 
-## Criar coluna `age_bracket`
+# Criar coluna `age_bracket`
 
 * Criança (até 14) ou adulto.
 
@@ -329,7 +346,7 @@ df_sem_idade %>%
 ```
 
 
-## Tentar prever idade das Miss?
+# Tentar prever idade das Miss?
 
 ```{r}
 df_misses_com_idade <- 
@@ -399,21 +416,5 @@ extract_fit_engine(final_lm)
 ```
 
 
-
-## Cabines faltantes (77%!)
-
-* Ignorar coluna?
-
-
-## O que significa a letra da cabine? 
-
-* Convés?
-
-
-## Pessoas com o mesmo bilhete ou mesma cabine
-
-* Estavam viajando juntas?
-
-* Eram da mesma família?
 
 

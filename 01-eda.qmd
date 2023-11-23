@@ -160,7 +160,12 @@ df %>% count(embarked)
 
 * Convés?
 
-* Mas ignorar.
+* Mas ignorar a coluna.
+
+```{r}
+df <- df %>% 
+  select(-cabin)
+```
 
 
 # Pessoas com o mesmo bilhete ou mesma cabine
@@ -168,6 +173,42 @@ df %>% count(embarked)
 * Estavam viajando juntas?
 
 * Eram da mesma família?
+
+* Quantos bilhetes no total? (Não existem NA.)
+
+```{r}
+df %>% 
+  pull(ticket) %>% 
+  length()
+  
+```
+
+* Quantos bilhetes diferentes?
+
+```{r}
+df$ticket %>% 
+  n_distinct()
+```
+
+* Quantos bilhetes com mais de uma pessoa?
+
+```{r}
+df %>% 
+  count(ticket, sort = TRUE) %>% 
+  filter(n > 1)
+```
+
+::: {.callout-note}
+
+## Bilhetes trazem que informação?
+
+Posso usar o bilhete para saber quantas pessoas viajavam juntas (com o mesmo bilhete). Mas aí teria que verificar o conjunto de teste também.
+
+Também posso não transformar em fator e analisar a semelhança dos bilhetes como *strings*. Mas aí teria que codificar os bilhetes, pois *strings* se tornam factors.
+
+Por enquanto, não fazer nada. Deixar os bilhetes como estão.
+
+:::
 
 
 # Idades faltantes (20%)
@@ -259,19 +300,19 @@ df_familias <- df %>%
 ```
 
 
-# Criar coluna `age_bracket`
+# Imputar idades faltantes
 
-* Criança (até 14) ou adulto.
+```{r}
+df_familias %>% 
+  filter(is.na(age)) %>% 
+  count(title, sort = TRUE)
+```
 
-* Usar idade.
+* Mrs é adulto.
 
-* Senão
+* Master é criança.
 
-  * Mrs é adulto.
-
-  * Master é criança.
-
-  * Mr é adulto.
+* Mr é adulto.
   
 * Conferir se esta heurística funciona para quem tem idade:
 
@@ -304,12 +345,12 @@ breaks = seq(0, 80, 10)
 df_com_idade %>% 
   filter(title %in% c('Master', 'Miss', 'Mlle', 'Mr', 'Mrs', 'Ms')) %>% 
   ggplot(aes(x = age)) +
-  geom_histogram(breaks = bins) +
-  scale_x_continuous(breaks = breaks) +
-  facet_wrap(~title) +
-  labs(
-    y = NULL
-  )
+    geom_histogram(breaks = bins) +
+    scale_x_continuous(breaks = breaks) +
+    facet_wrap(~title) +
+    labs(
+      y = NULL
+    )
 ```
 
 * A heurística funciona para Master.
@@ -346,17 +387,12 @@ df_sem_idade %>%
 ```
 
 
-# Tentar prever idade das Miss?
+# Tentar prever idade das Miss a partir da classe e de `par_ch`
 
 ```{r}
 df_misses_com_idade <- 
   df_com_idade %>% 
-  filter(title == 'Miss') %>% 
-  select(-c(survived, sex, title))
-```
-
-```{r}
-df_misses_com_idade %>% dfSummary() %>% print(method = 'render')
+  filter(title == 'Miss')
 ```
 
 * Split:
@@ -407,14 +443,101 @@ final_lm <- last_fit(lm_wflow, misses_split)
 collect_metrics(final_lm)
 ```
 
+* Retreinar o modelo com tudo:
+
 ```{r}
-collect_predictions(final_lm)
+lm_wflow %>% 
+  update_model(lm_modelo)
 ```
 
 ```{r}
-extract_fit_engine(final_lm)
+lm_wflow_fit <- lm_wflow %>% fit(df_misses_com_idade)
+```
+
+```{r}
+lm_wflow_fit %>% tidy()
 ```
 
 
+* Recolher Misses sem idade:
+
+```{r}
+df_misses_sem_idade <- 
+  df_sem_idade %>% 
+  filter(title == 'Miss') %>% 
+  select(-c(survived, sex, title))
+```
+
+* Prever idade delas:
+
+```{r}
+df_idades_estimadas <- lm_wflow_fit %>% 
+  predict(df_misses_sem_idade) %>% 
+  bind_cols(df_misses_sem_idade) %>% 
+  mutate(age = round(.pred, 0), .keep = 'unused')
+
+df_idades_estimadas
+```
+
+* Fazer função para preencher idades faltantes:
+
+```{r}
+imputar_idade <- function(
+    df,         # Data frame completo
+    modelo
+) {
+  
+  sem_idade <- df %>% 
+    filter(is.na(age))
+  
+  misses <- sem_idade %>% 
+    filter(title == 'Miss')
+  
+  outros <- sem_idade %>% 
+    filter(title != 'Miss')
+  
+  outros <- outros %>% 
+    mutate(
+      age = case_when(
+        title == 'Mrs' ~ 35,
+        title == 'Master' ~ 5,
+        title == 'Mr' ~ 30,
+        TRUE ~ 30
+      )
+    )
+  
+  misses <- misses %>% 
+    mutate(
+      age = predict(modelo, misses) %>% pull(.pred) %>% round(0)
+    )
+  
+  df %>% 
+    filter(!is.na(age)) %>%      # os que já tinham idade 
+    bind_rows(outros, misses)    # imputados
+  
+}
+```
+
+* Go
+
+```{r}
+df_idades_imputadas <- 
+  imputar_idade(df_familias, lm_wflow_fit)
+```
+
+```{r}
+df_idades_imputadas %>% dfSummary() %>% print(method = 'render')
+```
 
 
+::: {.callout-note}
+
+## TODO
+
+1. Desfazer as transformações para fator, pois vão precisar fazer parte da receita.
+
+1. Gravar df final como csv.
+
+1. Preparar receita e modelo para prever `survived` (em outro .qmd).
+
+:::

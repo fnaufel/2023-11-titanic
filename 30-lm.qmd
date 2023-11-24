@@ -36,7 +36,7 @@ source('_setup.R')
 ???
 
 
-# Só treino
+# Usando só `train.csv`
 
 ## Leitura
 
@@ -79,7 +79,203 @@ wf
 
 ## Receita
 
+### Definindo id e resposta
+
 ```{r}
-receita <- recipe(treino)
+receita <- recipe(treino) %>% 
+  update_role(id, new_role = 'id') %>% 
+  step_mutate(survived = survived == 1) %>% 
+  update_role(survived, new_role = 'outcome')
+```
+
+
+### Sexo, porto, bilhete, classe
+
+Sexo e porto de embarque como fatores.
+
+Bilhete com nível 'outros'.
+
+Classe como fator ordenado.
+
+```{r}
+receita <- receita %>% 
+  step_other(ticket, threshold = 2, other = 'outros') %>% 
+  step_mutate(pclass = fct_rev(ordered(pclass)))
+```
+
+Imputar porto por moda:
+
+```{r}
+receita <- receita %>% 
+  step_impute_mode(embarked)
+```
+
+
+### Nome, título, família
+
+```{r}
+extrair_familia <- function(s) {
+  str_split_i(s, ',[ ]*', 1)
+}
+
+extrair_titulo <- function(s) {
+  s <- str_split_i(s, ',[ ]*', 2)
+  str_split_i(s, stringr::fixed('.'), 1)
+}
+
+extrair_nome <- function(s) {
+  s <- str_split_i(s, ',[ ]*', 2)
+  s <- str_split_i(s, stringr::fixed('.'), 2)
+  str_trim(s)
+}
+```
+
+```{r}
+receita <- receita %>% 
+  step_mutate(
+    family = factor(extrair_familia(name)),
+    title_abbrev = factor(extrair_titulo(name))
+  ) %>% 
+  step_mutate(
+    name = extrair_nome(name),
+    role = 'id'
+  )
+```
+
+
+### Criar faixa etária
+
+Ainda vão sobrar misses sem idades, que serão imputadas depois.
+
+```{r}
+calcular_faixa <- function(age, tit) {
+  case_when(
+    !is.na(age) & age < 14 ~ 'child',
+    !is.na(age) & age >= 14 ~ 'adult',
+    is.na(age) & str_detect(tit, 'Miss') ~ NA_character_,
+    is.na(age) & str_detect(tit, 'Master') ~ 'child',
+    TRUE ~ 'adult'
+  )
+}
+
+receita <- receita %>% 
+  step_mutate(
+    faixa = factor(calcular_faixa(age, title_abbrev))
+  )
+```
+
+
+### Criar dummies
+
+Note que a coluna `title_abbrev` ainda era necessária para caclular a idade. Por isso só é seguro transformá-la em *dummy* aqui.
+
+Por outro lado, ainda não posso transformar `faixa` em *dummy*, pois ainda vou imputar valores faltantes.
+
+```{r}
+receita <- receita %>% 
+  step_dummy(
+    pclass, family, title_abbrev, sex, ticket, embarked
+  )
+```
+
+
+### Atribuir papéis
+
+```{r}
+receita <- receita %>% 
+  update_role(
+    sib_sp, par_ch, fare,
+    new_role = 'predictor'
+  ) %>% 
+  update_role(
+    name, new_role = 'id'
+  )
+```
+
+
+### Descartar colunas
+
+Colunas que sobraram:
+
+```{r}
+recipes_eval_select(
+  quos(has_role(NA)),
+  treino, 
+  summary(receita)
+)
+```
+
+Remover:
+
+```{r}
+receita <- receita %>% 
+  step_rm(age, cabin)
+```
+
+
+### Imputar faixa etária
+
+Note que este passo precisa dos outros preditores prontos.
+
+```{r}
+receita <- receita %>% 
+  step_impute_knn(faixa)
+```
+
+Finalmente, transformar `faixa` em *dummy*.
+
+```{r}
+receita <- receita %>% 
+  step_dummy(faixa)
+```
+
+
+### Resumo da receita
+
+```{r}
+receita
+```
+
+```{r}
+summary(receita)
+```
+
+
+### Verificando a receita
+
+```{r}
+df_transformado <- receita %>% 
+  prep(
+    treino,
+    fresh = TRUE,
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE
+  ) %>%
+  bake(new_data = NULL)
+```
+
+```{r}
+df_transformado
+```
+
+```{r}
+df_transformado %>% glimpse()
+```
+
+```{r}
+df_transformado %>% dfSummary() %>% print(method = 'render')
+```
+
+
+## Adicionar ao *workflow*
+
+```{r}
+wf <- wf %>% 
+  add_recipe(receita)
+```
+
+```{r}
+wf
 ```
 

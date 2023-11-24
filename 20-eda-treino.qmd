@@ -1,5 +1,5 @@
 ---
-title: "Titanic competition: EDA"
+title: "Titanic competition: EDA (só df de treino)"
 author: "Fernando Náufel"
 date: now
 date-format: "DD/MM/YYYY HH:mm"
@@ -32,33 +32,17 @@ source('_setup.R')
 ```
 
 
-# Leitura e limpeza
+# Leitura
 
 ```{r}
 df <- read_csv(
-  'dados/train.csv'
+  'dados/train_limpo.csv'
 )
 ```
 
 ```{r}
 df %>% glimpse()
 ```
-
-## Limpar nomes
-
-```{r}
-df <- df %>% 
-  clean_names() %>% 
-  rename(
-    id = passenger_id,
-    par_ch = parch
-  )
-```
-
-```{r}
-df %>% glimpse()
-```
-
 
 ## Converter `survived` para booleano
 
@@ -153,14 +137,14 @@ df %>% count(embarked)
 
 # Cabines faltantes (77%!)
 
-* Ignorar coluna.
+Ignorar coluna.
 
 
 ## O que significa a letra da cabine? 
 
-* Convés?
+Convés?
 
-* Mas ignorar a coluna.
+Mas ignorar a coluna.
 
 ```{r}
 df <- df %>% 
@@ -170,27 +154,26 @@ df <- df %>%
 
 # Pessoas com o mesmo bilhete ou mesma cabine
 
-* Estavam viajando juntas?
+Estavam viajando juntas?
 
-* Eram da mesma família?
+Eram da mesma família?
 
-* Quantos bilhetes no total? (Não existem NA.)
+Quantos bilhetes no total? (Não existem NA.)
 
 ```{r}
 df %>% 
   pull(ticket) %>% 
   length()
-  
 ```
 
-* Quantos bilhetes diferentes?
+Quantos bilhetes diferentes?
 
 ```{r}
 df$ticket %>% 
   n_distinct()
 ```
 
-* Quantos bilhetes com mais de uma pessoa?
+Quantos bilhetes com mais de uma pessoa?
 
 ```{r}
 df %>% 
@@ -213,11 +196,11 @@ Por enquanto, não fazer nada. Deixar os bilhetes como estão.
 
 # Idades faltantes (20%)
 
-* Da documentação:
+Da documentação:
 
-  > Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
+> Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
   
-* Estimar se adulto ou criança usando nome, sobrenome, título, passagem?
+Estimar se adulto ou criança usando nome, sobrenome, título, passagem?
 
 ```{r}
 df %>% 
@@ -255,7 +238,7 @@ df_nomes %>%
   count(title, sort = TRUE)
 ```
 
-* Jonkheer (female equivalent: jonkvrouw; French: Écuyer; English: Squire) is an honorific in the Low Countries denoting the lowest rank within the nobility.
+Jonkheer (female equivalent: jonkvrouw; French: Écuyer; English: Squire) is an honorific in the Low Countries denoting the lowest rank within the nobility.
 
 ```{r}
 df_nomes %>% 
@@ -277,7 +260,7 @@ df_nomes %>%
   count(name, sort = TRUE)
 ```
 
-* O que significam os nomes em parênteses?
+O que significam os nomes em parênteses?
 
 ```{r}
 df %>% 
@@ -288,7 +271,7 @@ df %>%
   arrange(name)
 ```
 
-* Juntar com df:
+Juntar com df:
 
 ```{r}
 df_familias <- df %>% 
@@ -302,6 +285,8 @@ df_familias <- df %>%
 
 # Imputar idades faltantes
 
+Quais são os títulos das pessoas sem idade?
+
 ```{r}
 df_familias %>% 
   filter(is.na(age)) %>% 
@@ -314,7 +299,7 @@ df_familias %>%
 
 * Mr é adulto.
   
-* Conferir se esta heurística funciona para quem tem idade:
+Conferir se esta heurística funciona para quem tem idade:
 
 ```{r}
 df_com_idade <- df_familias %>% 
@@ -336,7 +321,7 @@ df_com_idade %>%
   select(title, age)
 ```
 
-* Visualizando:
+Visualizando:
 
 ```{r}
 bins = seq(0, 80, 5)
@@ -353,9 +338,9 @@ df_com_idade %>%
     )
 ```
 
-* A heurística funciona para Master.
+A heurística funciona para Master.
 
-* Funciona para Mr. (com 3 erros):
+Funciona para Mr. (com 3 erros):
 
 ```{r}
 df_com_idade %>% 
@@ -363,7 +348,7 @@ df_com_idade %>%
   select(title, name, family, age)
 ```
 
-* Funciona para Mrs. (com 1 erro):
+Funciona para Mrs. (com 1 erro):
 
 ```{r}
 df_com_idade %>% 
@@ -371,9 +356,9 @@ df_com_idade %>%
   select(title, name, family, age)
 ```
 
-* Para Miss, a idade é imprevisível. Muitas solteironas?
+Para Miss, a idade é imprevisível. Muitas solteironas?
 
-* Sem idade:
+Sem idade:
 
 ```{r}
 df_sem_idade <- 
@@ -389,13 +374,15 @@ df_sem_idade %>%
 
 # Tentar prever idade das Miss a partir da classe e de `par_ch`
 
+Só misses com idade:
+
 ```{r}
 df_misses_com_idade <- 
   df_com_idade %>% 
   filter(title == 'Miss')
 ```
 
-* Split:
+Split:
 
 ```{r}
 misses_split <- df_misses_com_idade %>% 
@@ -404,7 +391,7 @@ treino <- training(misses_split)
 teste <- testing(misses_split)
 ```
 
-* Regressão:
+Regressão:
 
 ```{r}
 lm_modelo <- 
@@ -443,7 +430,7 @@ final_lm <- last_fit(lm_wflow, misses_split)
 collect_metrics(final_lm)
 ```
 
-* Retreinar o modelo com tudo:
+Retreinar o modelo com tudo:
 
 ```{r}
 lm_wflow %>% 
@@ -458,8 +445,21 @@ lm_wflow_fit <- lm_wflow %>% fit(df_misses_com_idade)
 lm_wflow_fit %>% tidy()
 ```
 
+Visualizar previsões para o próprio conjunto de treino:
 
-* Recolher Misses sem idade:
+```{r}
+augment(lm_wflow_fit, df_misses_com_idade) %>% 
+  ggplot() +
+    geom_point(
+      aes(age, .pred)
+    ) +
+    geom_abline(color = 'green') +
+    coord_fixed()
+```
+
+Horrível.
+
+Recolher Misses sem idade:
 
 ```{r}
 df_misses_sem_idade <- 
@@ -468,18 +468,20 @@ df_misses_sem_idade <-
   select(-c(survived, sex, title))
 ```
 
-* Prever idade delas:
+Prever idade delas:
 
 ```{r}
 df_idades_estimadas <- lm_wflow_fit %>% 
   predict(df_misses_sem_idade) %>% 
   bind_cols(df_misses_sem_idade) %>% 
   mutate(age = round(.pred, 0), .keep = 'unused')
+```
 
+```{r}
 df_idades_estimadas
 ```
 
-* Fazer função para preencher idades faltantes:
+Fazer função para preencher idades faltantes:
 
 ```{r}
 imputar_idade <- function(
@@ -518,7 +520,7 @@ imputar_idade <- function(
 }
 ```
 
-* Go
+Go:
 
 ```{r}
 df_idades_imputadas <- 
@@ -529,15 +531,3 @@ df_idades_imputadas <-
 df_idades_imputadas %>% dfSummary() %>% print(method = 'render')
 ```
 
-
-::: {.callout-note}
-
-## TODO
-
-1. Desfazer as transformações para fator, pois vão precisar fazer parte da receita.
-
-1. Gravar df final como csv.
-
-1. Preparar receita e modelo para prever `survived` (em outro .qmd).
-
-:::

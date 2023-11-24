@@ -1,0 +1,176 @@
+---
+title: "Titanic competition: gerar csv limpos"
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+
+#bibliography: bibliography.bib
+#csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-depth: 3
+    theme: 
+      - journal
+      - _custom.scss
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+---
+
+{{< include _math.qmd >}}
+
+
+# Objetivos
+
+* Ler arquivos csv.
+
+* Limpar nomes.
+
+* Gravar novos arquivos csv.
+
+::: {.callout-important}
+
+## Importante
+
+* EDA é feita [em outro arquivo](./10-eda.html).
+
+* Aqui, não é feita qualquer *feature engineering* (nem mesmo transformação de *strings* em fatores). A idéia é que os modelos devem se encarregar disso, cada um de acordo com suas necessidades.
+
+:::
+
+
+# Setup
+
+```{r setup}
+source('_setup.R')
+```
+
+
+# Só treino
+
+## Leitura
+
+```{r}
+df_treino <- read_csv(
+  'dados/train.csv'
+)
+```
+
+```{r}
+df_treino %>% glimpse()
+```
+
+
+## Limpar nomes
+
+```{r}
+df_treino <- df_treino %>% 
+  clean_names() %>% 
+  rename(
+    id = passenger_id,
+    par_ch = parch
+  )
+```
+
+```{r}
+df_treino %>% glimpse()
+```
+
+
+## Sumário
+
+```{r}
+df_treino %>% dfSummary() %>% print(method = 'render')
+```
+
+
+## Gravar
+
+```{r}
+df_treino %>% 
+  write_csv(
+    'dados/train_limpo.csv'
+  )
+```
+
+
+# Só teste
+
+## Leitura
+
+```{r}
+df_teste <- read_csv(
+  'dados/test.csv'
+)
+```
+
+```{r}
+df_teste %>% glimpse()
+```
+
+
+## Limpar nomes
+
+```{r}
+df_teste <- df_teste %>% 
+  clean_names() %>% 
+  rename(
+    id = passenger_id,
+    par_ch = parch
+  )
+```
+
+```{r}
+df_teste %>% glimpse()
+```
+
+
+## Sumário
+
+```{r}
+df_teste %>% dfSummary() %>% print(method = 'render')
+```
+
+
+## Gravar
+
+```{r}
+df_teste %>% 
+  write_csv(
+    'dados/test_limpo.csv'
+  )
+```
+
+
+# Teste e treino em um dó df
+
+## *Bind*
+
+```{r}
+df_tudo <- df_teste %>% 
+  mutate(survived = NA) %>% 
+  bind_rows(df_treino)
+```
+
+
+## Sumário
+
+```{r}
+df_tudo %>% dfSummary() %>% print(method = 'render')
+```
+
+
+## Gravar
+
+```{r}
+df_tudo %>% 
+  write_csv(
+    'dados/both_limpo.csv'
+  )
+```
+

@@ -1,0 +1,85 @@
+---
+title: "Titanic competition: multiple logistic regression"
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+
+#bibliography: bibliography.bib
+#csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-depth: 3
+    theme: 
+      - journal
+      - _custom.scss
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+---
+
+{{< include _math.qmd >}}
+
+
+# Setup
+
+```{r setup}
+source('_setup.R')
+```
+
+# Objetivos
+
+???
+
+
+# Só treino
+
+## Leitura
+
+```{r}
+df <- read_csv(
+  'dados/train_limpo.csv'
+)
+```
+
+```{r}
+df %>% glimpse()
+```
+
+
+## Split
+
+```{r}
+split <- initial_split(df, strata = survived)
+treino <- training(split)
+teste <- testing(split)
+```
+
+
+## Workflow e modelo
+
+```{r}
+modelo <- 
+  logistic_reg() %>% 
+  set_engine('glm')
+```
+
+```{r}
+wf <- 
+  workflow() %>% 
+  add_model(modelo)
+
+wf
+```
+
+
+## Receita
+
+```{r}
+receita <- recipe(treino)
+```
+

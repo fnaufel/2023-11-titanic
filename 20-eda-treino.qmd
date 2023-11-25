@@ -29,10 +29,11 @@ format:
 
 ```{r setup}
 source('_setup.R')
+source('R/functions.R')
 ```
 
 
-# Leitura
+# Leitura e receita pós-leitura
 
 ```{r}
 df <- read_csv(
@@ -41,73 +42,19 @@ df <- read_csv(
 ```
 
 ```{r}
+df <- receita_pos_leitura(df) %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL)
+```
+
+```{r}
 df %>% glimpse()
 ```
-
-## Converter `survived` para booleano
-
-```{r}
-df <- df %>% 
-  mutate(
-    survived = case_when(
-      survived == 0 ~ FALSE,
-      survived == 1 ~ TRUE
-    )
-  )
-```
-
-```{r}
-df$survived %>% str()
-```
-
-
-## Converter `pclass` para fator ordenado
-
-```{r}
-df <- df %>% 
-  mutate(
-    pclass =  fct_rev(ordered(pclass))
-  )
-```
-
-```{r}
-df$pclass %>% str()
-```
-
-
-## Converter `sex` para fator
-
-```{r}
-df <- df %>% 
-  mutate(
-    sex = as_factor(sex) %>% 
-      fct_relabel(
-        ~case_when(
-          . == 'male' ~ 'M',
-          . == 'female' ~ 'F',
-        )
-      )
-  )
-```
-
-```{r}
-df$sex %>% str()
-```
-
-
-## Converter `embarked` para fator
-
-```{r}
-df <- df %>% 
-  mutate(
-    embarked = as_factor(embarked)
-  )
-```
-
-```{r}
-df$embarked %>% str()
-```
-
 
 ## Sumário
 
@@ -116,418 +63,204 @@ df %>% dfSummary() %>% print(method = 'render')
 ```
 
 
-# Porto de embarque faltante (só 2)
-
-* Imputar S? (Mais comum)
-
-```{r}
-df <- df %>% 
-  mutate(
-    embarked = case_when(
-      is.na(embarked) ~ 'S',
-      TRUE ~ embarked
-    )
-  )
-```
-
-```{r}
-df %>% count(embarked)
-```
-
-
-# Cabines faltantes (77%!)
-
-Ignorar coluna.
-
-
-## O que significa a letra da cabine? 
-
-Convés?
-
-Mas ignorar a coluna.
-
-```{r}
-df <- df %>% 
-  select(-cabin)
-```
-
-
-# Pessoas com o mesmo bilhete ou mesma cabine
-
-Estavam viajando juntas?
-
-Eram da mesma família?
-
-Quantos bilhetes no total? (Não existem NA.)
+# Sobrevivência por classe
 
 ```{r}
 df %>% 
-  pull(ticket) %>% 
-  length()
+  group_by(pclass) %>% 
+  summarize(n = n(), .groups = 'drop')
 ```
-
-Quantos bilhetes diferentes?
-
-```{r}
-df$ticket %>% 
-  n_distinct()
-```
-
-Quantos bilhetes com mais de uma pessoa?
 
 ```{r}
 df %>% 
-  count(ticket, sort = TRUE) %>% 
-  filter(n > 1)
+  group_by(pclass, survived) %>% 
+  summarize(n = n(), .groups = 'drop')
 ```
 
-::: {.callout-note}
+Absolutos:
 
-## Bilhetes trazem que informação?
+```{r}
+df %>% 
+  ggplot(aes(pclass, fill = survived)) +
+    geom_bar(position = 'dodge') +
+    labs(y = NULL)
+```
 
-Posso usar o bilhete para saber quantas pessoas viajavam juntas (com o mesmo bilhete). Mas aí teria que verificar o conjunto de teste também.
+Proporções:
 
-Também posso não transformar em fator e analisar a semelhança dos bilhetes como *strings*. Mas aí teria que codificar os bilhetes, pois *strings* se tornam factors.
+```{r}
+df %>% 
+  ggplot(aes(pclass, fill = survived)) +
+    geom_bar(position = 'fill') +
+    labs(y = NULL)
+```
 
-Por enquanto, não fazer nada. Deixar os bilhetes como estão.
+
+# Sobrevivência por sexo
+
+```{r}
+df %>% 
+  ggplot(aes(sex, fill = survived)) +
+    geom_bar(position = 'fill') +
+    labs(y = NULL)
+```
+
+
+# Sobrevivência por sexo e classe
+
+Quantas pessoas havia por classe e sexo?
+
+```{r}
+df %>% 
+  group_by(pclass, sex) %>% 
+  summarize(n = n(), .groups = 'drop')
+```
+
+
+Proporções:
+
+```{r}
+df %>% 
+  ggplot(aes(sex, fill = survived)) +
+    geom_bar(position = 'fill') +
+    labs(y = NULL) +
+    facet_wrap(~pclass)
+```
+
+Absolutos:
+
+```{r}
+df %>% 
+  ggplot(aes(sex, fill = survived)) +
+    geom_bar(position = 'dodge') +
+    labs(y = NULL) +
+    facet_wrap(~pclass)
+```
+
+::: {.callout-important collapse="true"}
+
+## Classe e sexo
+
+Quase todas as mulheres da primeira e da segunda classes sobreviveram!
+
+Só estas morreram:
+
+```{r}
+df %>% 
+  filter(!survived & sex == 'F' & pclass %in% c(1, 2)) %>% 
+  select(pclass, age, title, family, fare) %>% 
+  arrange(pclass, desc(age))
+```
 
 :::
 
 
-# Idades faltantes (20%)
-
-Da documentação:
-
-> Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
-  
-Estimar se adulto ou criança usando nome, sobrenome, título, passagem?
+# Sobrevivência por passagem
 
 ```{r}
 df %>% 
-  filter(is.na(age)) %>% 
-  select(name, sib_sp, par_ch, sex, pclass, fare) %>% 
-  arrange(name)
+  ggplot(aes(survived, fare)) +
+    geom_boxplot()
 ```
 
-
-# Criar colunas `family` e `title`
+Só passagens abaixo de $100$:
 
 ```{r}
-df_nomes <- df %>% 
-  select(id, name) %>% 
-  separate_wider_delim(
-    name, 
-    regex(',[ ]*'), 
-    names = c('family', 'rest')
-  ) %>% 
-  separate_wider_delim(
-    rest,
-    '.',
-    names = c('title', 'name'),
-    too_many = 'merge'
-  ) %>% 
-  arrange(family)
+df %>% 
+  filter(fare < 100) %>% 
+  ggplot(aes(survived, fare)) +
+    geom_boxplot()
+```
+
+
+# Sobrevivência por idade
+
+```{r}
+df %>% 
+  ggplot(aes(age, fill = survived)) +
+    geom_histogram(breaks = seq(0, 80, 5)) +
+    facet_wrap(~survived, ncol = 1) +
+    scale_x_continuous(breaks = seq(0, 80, 5)) +
+    labs(y = NULL)
+```
+
+
+# Sobrevivência por número de pais e filhos
+
+```{r}
+df %>% 
+  count(par_ch, survived)
 ```
 
 ```{r}
-df_nomes 
+df %>% 
+  ggplot(aes(par_ch, fill = survived)) +
+    geom_bar(position = 'dodge') +
+    scale_x_continuous(breaks = 0:6) +
+    labs(y = NULL)
+```
+
+
+# Sobrevivência por número de irmãos e cônjuges
+
+```{r}
+df %>% 
+  count(sib_sp, survived)
 ```
 
 ```{r}
-df_nomes %>% 
-  count(title, sort = TRUE)
+df %>% 
+  ggplot(aes(sib_sp, fill = survived)) +
+    geom_bar(position = 'dodge') +
+    scale_x_continuous(breaks = 0:8) +
+    labs(y = NULL)
 ```
 
-Jonkheer (female equivalent: jonkvrouw; French: Écuyer; English: Squire) is an honorific in the Low Countries denoting the lowest rank within the nobility.
+
+# Títulos e idades
 
 ```{r}
-df_nomes %>% 
-  count(family, sort = TRUE)
+df %>% 
+  ggplot(aes(fct_reorder(title, -age, .na_rm = TRUE), age)) +
+    geom_boxplot() +
+    geom_point(alpha = 0.3, size = 1, color = 'blue') +
+    scale_y_continuous(breaks = seq(0, 80, 5)) +
+    coord_flip() +
+    labs(x = NULL)
 ```
 
-::: {.callout-note}
+::: {.callout-important collapse="true"}
 
-## Atenção
+## Títulos e idades
 
-Pessoas que não têm parentes no conjunto de treino podem ter parentes no conjunto de teste!
+Várias idades estão faltando e vão precisar ser imputadas. Os títulospodem ajudar.
 
-Talvez seja melhor confiar nas colunas `par_ch` e `sib_sp`?
+* Todos os *Masters* são crianças (${}<14$). 
+* As *Misses* podem ser de qualquer idade.
+* Todos os restantes são adultos.
 
 :::
 
-```{r}
-df_nomes %>% 
-  count(name, sort = TRUE)
-```
 
-O que significam os nomes em parênteses?
+# Sobrevivência por porto de embarque
 
 ```{r}
 df %>% 
-  filter(
-    str_detect(name, '[)(]')
-  ) %>% 
-  select(name) %>% 
-  arrange(name)
-```
-
-Juntar com df:
-
-```{r}
-df_familias <- df %>% 
-  select(-name) %>% 
-  left_join(
-    df_nomes,
-    by = 'id'
-  )
-```
-
-
-# Imputar idades faltantes
-
-Quais são os títulos das pessoas sem idade?
-
-```{r}
-df_familias %>% 
-  filter(is.na(age)) %>% 
-  count(title, sort = TRUE)
-```
-
-* Mrs é adulto.
-
-* Master é criança.
-
-* Mr é adulto.
-  
-Conferir se esta heurística funciona para quem tem idade:
-
-```{r}
-df_com_idade <- df_familias %>% 
-  filter(!is.na(age))
+  count(embarked, survived)
 ```
 
 ```{r}
-df_com_idade %>% 
-  mutate(
-    ok = case_when(
-      title == 'Mrs' ~ age >= 14,
-      title == 'Mr' ~ age >= 14,
-      title == 'Miss' ~ age < 14,
-      title == 'Dr' ~ age >= 14,
-      TRUE ~ NA
-    )
-  ) %>% 
-  filter(!ok) %>% 
-  select(title, age)
+df %>% 
+  ggplot(aes(embarked, fill = survived)) +
+    geom_bar(position = 'dodge')
 ```
 
-Visualizando:
+::: {.callout-important collapse="true"}
 
-```{r}
-bins = seq(0, 80, 5)
-breaks = seq(0, 80, 10)
+## Porto de embarque importa!
 
-df_com_idade %>% 
-  filter(title %in% c('Master', 'Miss', 'Mlle', 'Mr', 'Mrs', 'Ms')) %>% 
-  ggplot(aes(x = age)) +
-    geom_histogram(breaks = bins) +
-    scale_x_continuous(breaks = breaks) +
-    facet_wrap(~title) +
-    labs(
-      y = NULL
-    )
-```
+Quem embarcou em *S* teve $2/3$ de probabilidade de morrer.
 
-A heurística funciona para Master.
+Quem embarcou nos outros portos teve $1/2$ de probabilidade de morrer.
 
-Funciona para Mr. (com 3 erros):
-
-```{r}
-df_com_idade %>% 
-  filter(title == 'Mr' & age < 15) %>% 
-  select(title, name, family, age)
-```
-
-Funciona para Mrs. (com 1 erro):
-
-```{r}
-df_com_idade %>% 
-  filter(title == 'Mrs' & age < 15) %>% 
-  select(title, name, family, age)
-```
-
-Para Miss, a idade é imprevisível. Muitas solteironas?
-
-Sem idade:
-
-```{r}
-df_sem_idade <- 
-  df_familias %>% 
-  filter(is.na(age))
-```
-
-```{r}
-df_sem_idade %>% 
-  count(title, sort = TRUE)
-```
-
-
-# Tentar prever idade das Miss a partir da classe e de `par_ch`
-
-Só misses com idade:
-
-```{r}
-df_misses_com_idade <- 
-  df_com_idade %>% 
-  filter(title == 'Miss')
-```
-
-Split:
-
-```{r}
-misses_split <- df_misses_com_idade %>% 
-  initial_split(strata = age)
-treino <- training(misses_split)
-teste <- testing(misses_split)
-```
-
-Regressão:
-
-```{r}
-lm_modelo <- 
-  linear_reg() %>% 
-  set_engine('lm')
-```
-
-```{r}
-lm_receita <- recipe(
-  age ~ pclass + par_ch,
-  treino
-) %>% 
-  step_dummy(pclass)
-
-lm_wflow <- 
-  workflow() %>% 
-  add_model(lm_modelo) %>% 
-  add_recipe(lm_receita)
-
-lm_wflow
-```
-
-```{r}
-modelo_lm_fit <- lm_wflow %>% fit(treino)
-```
-
-```{r}
-modelo_lm_fit %>% tidy()
-```
-
-```{r}
-final_lm <- last_fit(lm_wflow, misses_split)
-```
-
-```{r}
-collect_metrics(final_lm)
-```
-
-Retreinar o modelo com tudo:
-
-```{r}
-lm_wflow %>% 
-  update_model(lm_modelo)
-```
-
-```{r}
-lm_wflow_fit <- lm_wflow %>% fit(df_misses_com_idade)
-```
-
-```{r}
-lm_wflow_fit %>% tidy()
-```
-
-Visualizar previsões para o próprio conjunto de treino:
-
-```{r}
-augment(lm_wflow_fit, df_misses_com_idade) %>% 
-  ggplot() +
-    geom_point(
-      aes(age, .pred)
-    ) +
-    geom_abline(color = 'green') +
-    coord_fixed()
-```
-
-Horrível.
-
-Recolher Misses sem idade:
-
-```{r}
-df_misses_sem_idade <- 
-  df_sem_idade %>% 
-  filter(title == 'Miss') %>% 
-  select(-c(survived, sex, title))
-```
-
-Prever idade delas:
-
-```{r}
-df_idades_estimadas <- lm_wflow_fit %>% 
-  predict(df_misses_sem_idade) %>% 
-  bind_cols(df_misses_sem_idade) %>% 
-  mutate(age = round(.pred, 0), .keep = 'unused')
-```
-
-```{r}
-df_idades_estimadas
-```
-
-Fazer função para preencher idades faltantes:
-
-```{r}
-imputar_idade <- function(
-    df,         # Data frame completo
-    modelo
-) {
-  
-  sem_idade <- df %>% 
-    filter(is.na(age))
-  
-  misses <- sem_idade %>% 
-    filter(title == 'Miss')
-  
-  outros <- sem_idade %>% 
-    filter(title != 'Miss')
-  
-  outros <- outros %>% 
-    mutate(
-      age = case_when(
-        title == 'Mrs' ~ 35,
-        title == 'Master' ~ 5,
-        title == 'Mr' ~ 30,
-        TRUE ~ 30
-      )
-    )
-  
-  misses <- misses %>% 
-    mutate(
-      age = predict(modelo, misses) %>% pull(.pred) %>% round(0)
-    )
-  
-  df %>% 
-    filter(!is.na(age)) %>%      # os que já tinham idade 
-    bind_rows(outros, misses)    # imputados
-  
-}
-```
-
-Go:
-
-```{r}
-df_idades_imputadas <- 
-  imputar_idade(df_familias, lm_wflow_fit)
-```
-
-```{r}
-df_idades_imputadas %>% dfSummary() %>% print(method = 'render')
-```
-
+:::

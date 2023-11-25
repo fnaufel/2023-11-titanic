@@ -43,7 +43,8 @@ source('_setup.R')
 ```{r}
 df <- read_csv(
   'dados/train_limpo.csv'
-)
+) %>% 
+  mutate(survived = factor(survived))
 ```
 
 ```{r}
@@ -64,8 +65,8 @@ teste <- testing(split)
 
 ```{r}
 modelo <- 
-  logistic_reg() %>% 
-  set_engine('glm')
+  logistic_reg(penalty = 0.1) %>% 
+  set_engine('glmnet')
 ```
 
 ```{r}
@@ -84,7 +85,6 @@ wf
 ```{r}
 receita <- recipe(treino) %>% 
   update_role(id, new_role = 'id') %>% 
-  step_mutate(survived = survived == 1) %>% 
   update_role(survived, new_role = 'outcome')
 ```
 
@@ -263,7 +263,7 @@ df_transformado
 df_transformado %>% glimpse()
 ```
 
-```{r}
+```{r eval=FALSE}
 df_transformado %>% dfSummary() %>% print(method = 'render')
 ```
 
@@ -278,4 +278,66 @@ wf <- wf %>%
 ```{r}
 wf
 ```
+
+
+## Treinar
+
+```{r}
+modelo_treino <- wf %>% fit(treino)
+```
+
+
+## Testar
+
+```{r}
+previsoes <- modelo_treino %>% predict(teste)
+```
+
+Muitos avisos. Resolver depois.
+
+```{r}
+teste %>% 
+  bind_cols(previsoes) %>% 
+  accuracy(truth = survived, estimate = .pred_class)
+```
+
+## Treinar no conjunto inteiro
+
+```{r}
+modelo_tudo <- wf %>% 
+  update_model(modelo) %>% 
+  fit(df)
+```
+
+
+## Prever `test.csv` para submissão
+
+```{r}
+teste_kaggle <- read_csv('dados/test_limpo.csv') 
+```
+
+```{r}
+previsoes_kaggle <- modelo_tudo %>% 
+  predict(teste_kaggle)
+```
+
+```{r}
+df_submeter <- teste_kaggle %>% 
+  select(PassengerId = id) %>% 
+  bind_cols(previsoes_kaggle %>% rename(Survived = .pred_class))
+```
+
+```{r}
+df_submeter %>% 
+  write_csv('dados/2023-11-24-glmnet.csv')
+```
+
+Uma das previsões deu NA!
+
+```{r}
+df_submeter %>% 
+  count(Survived)
+```
+
+## Score: 0.77033
 

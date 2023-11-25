@@ -1,0 +1,308 @@
+# Imputar idades faltantes
+
+Quais são os títulos das pessoas sem idade?
+
+```{r}
+df_familias %>% 
+  filter(is.na(age)) %>% 
+  count(title, sort = TRUE)
+```
+
+* Mrs é adulto.
+
+* Master é criança.
+
+* Mr é adulto.
+  
+Conferir se esta heurística funciona para quem tem idade:
+
+```{r}
+df_com_idade <- df_familias %>% 
+  filter(!is.na(age))
+```
+
+```{r}
+df_com_idade %>% 
+  mutate(
+    ok = case_when(
+      title == 'Mrs' ~ age >= 14,
+      title == 'Mr' ~ age >= 14,
+      title == 'Miss' ~ age < 14,
+      title == 'Dr' ~ age >= 14,
+      TRUE ~ NA
+    )
+  ) %>% 
+  filter(!ok) %>% 
+  select(title, age)
+```
+
+Visualizando:
+
+```{r}
+bins = seq(0, 80, 5)
+breaks = seq(0, 80, 10)
+
+df_com_idade %>% 
+  filter(title %in% c('Master', 'Miss', 'Mlle', 'Mr', 'Mrs', 'Ms')) %>% 
+  ggplot(aes(x = age)) +
+    geom_histogram(breaks = bins) +
+    scale_x_continuous(breaks = breaks) +
+    facet_wrap(~title) +
+    labs(
+      y = NULL
+    )
+```
+
+A heurística funciona para Master.
+
+Funciona para Mr. (com 3 erros):
+
+```{r}
+df_com_idade %>% 
+  filter(title == 'Mr' & age < 15) %>% 
+  select(title, name, family, age)
+```
+
+Funciona para Mrs. (com 1 erro):
+
+```{r}
+df_com_idade %>% 
+  filter(title == 'Mrs' & age < 15) %>% 
+  select(title, name, family, age)
+```
+
+Para Miss, a idade é imprevisível. Muitas solteironas?
+
+Sem idade:
+
+```{r}
+df_sem_idade <- 
+  df_familias %>% 
+  filter(is.na(age))
+```
+
+```{r}
+df_sem_idade %>% 
+  count(title, sort = TRUE)
+```
+
+
+# Tentar prever idade das Miss a partir da classe e de `par_ch`
+
+Só misses com idade:
+
+```{r}
+df_misses_com_idade <- 
+  df_com_idade %>% 
+  filter(title == 'Miss')
+```
+
+Split:
+
+```{r}
+misses_split <- df_misses_com_idade %>% 
+  initial_split(strata = age)
+treino <- training(misses_split)
+teste <- testing(misses_split)
+```
+
+Regressão:
+
+```{r}
+lm_modelo <- 
+  linear_reg() %>% 
+  set_engine('lm')
+```
+
+```{r}
+lm_receita <- recipe(
+  age ~ pclass + par_ch,
+  treino
+) %>% 
+  step_dummy(pclass)
+
+lm_wflow <- 
+  workflow() %>% 
+  add_model(lm_modelo) %>% 
+  add_recipe(lm_receita)
+
+lm_wflow
+```
+
+```{r}
+modelo_lm_fit <- lm_wflow %>% fit(treino)
+```
+
+```{r}
+modelo_lm_fit %>% tidy()
+```
+
+```{r}
+final_lm <- last_fit(lm_wflow, misses_split)
+```
+
+```{r}
+collect_metrics(final_lm)
+```
+
+Retreinar o modelo com tudo:
+
+```{r}
+lm_wflow %>% 
+  update_model(lm_modelo)
+```
+
+```{r}
+lm_wflow_fit <- lm_wflow %>% fit(df_misses_com_idade)
+```
+
+```{r}
+lm_wflow_fit %>% tidy()
+```
+
+Visualizar previsões para o próprio conjunto de treino:
+
+```{r}
+augment(lm_wflow_fit, df_misses_com_idade) %>% 
+  ggplot() +
+    geom_point(
+      aes(age, .pred)
+    ) +
+    geom_abline(color = 'green') +
+    coord_fixed()
+```
+
+Horrível.
+
+Recolher Misses sem idade:
+
+```{r}
+df_misses_sem_idade <- 
+  df_sem_idade %>% 
+  filter(title == 'Miss') %>% 
+  select(-c(survived, sex, title))
+```
+
+Prever idade delas:
+
+```{r}
+df_idades_estimadas <- lm_wflow_fit %>% 
+  predict(df_misses_sem_idade) %>% 
+  bind_cols(df_misses_sem_idade) %>% 
+  mutate(age = round(.pred, 0), .keep = 'unused')
+```
+
+```{r}
+df_idades_estimadas
+```
+
+Fazer função para preencher idades faltantes:
+
+```{r}
+imputar_idade <- function(
+    df,         # Data frame completo
+    modelo
+) {
+  
+  sem_idade <- df %>% 
+    filter(is.na(age))
+  
+  misses <- sem_idade %>% 
+    filter(title == 'Miss')
+  
+  outros <- sem_idade %>% 
+    filter(title != 'Miss')
+  
+  outros <- outros %>% 
+    mutate(
+      age = case_when(
+        title == 'Mrs' ~ 35,
+        title == 'Master' ~ 5,
+        title == 'Mr' ~ 30,
+        TRUE ~ 30
+      )
+    )
+  
+  misses <- misses %>% 
+    mutate(
+      age = predict(modelo, misses) %>% pull(.pred) %>% round(0)
+    )
+  
+  df %>% 
+    filter(!is.na(age)) %>%      # os que já tinham idade 
+    bind_rows(outros, misses)    # imputados
+  
+}
+```
+
+Go:
+
+```{r}
+df_idades_imputadas <- 
+  imputar_idade(df_familias, lm_wflow_fit)
+```
+
+```{r}
+df_idades_imputadas %>% dfSummary() %>% print(method = 'render')
+```
+
+# Porto de embarque faltante (só 2)
+
+* Imputar S
+
+
+# Cabines faltantes (77%!)
+
+Ignorar coluna.
+
+
+## O que significa a letra da cabine? 
+
+Convés?
+
+Mas ignorar a coluna.
+
+
+# Pessoas com o mesmo bilhete
+
+Estavam viajando juntas?
+
+Eram da mesma família?
+
+Quantos bilhetes no total? (Não existem NA.)
+
+```{r}
+df %>% 
+  pull(ticket) %>% 
+  length()
+```
+
+Quantos bilhetes diferentes?
+
+```{r}
+df$ticket %>% 
+  n_distinct()
+```
+
+Quantos bilhetes com mais de uma pessoa?
+
+```{r}
+df %>% 
+  count(ticket, sort = TRUE) %>% 
+  filter(n > 1)
+```
+
+::: {.callout-note}
+
+## Bilhetes trazem que informação?
+
+Posso usar o bilhete para saber quantas pessoas viajavam juntas (com o mesmo bilhete). Mas aí teria que verificar o conjunto de teste também.
+
+Também posso não transformar em fator e analisar a semelhança dos bilhetes como *strings*. Mas aí teria que codificar os bilhetes, pois *strings* se tornam factors.
+
+Por enquanto, não fazer nada. Deixar os bilhetes como estão.
+
+:::
+
+
+

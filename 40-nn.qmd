@@ -1,0 +1,226 @@
+---
+title: "Titanic competition: keras"
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+
+#bibliography: bibliography.bib
+#csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-depth: 3
+    theme: 
+      - journal
+      - _custom.scss
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+---
+
+{{< include _math.qmd >}}
+
+
+# Setup
+
+```{r setup}
+source('_setup.R')
+source('R/functions.R')
+```
+
+# Leitura
+
+```{r}
+df <- ler(
+  'dados/train_faixas_imputadas.csv'
+)
+```
+
+```{r}
+df_prever <- ler(
+  'dados/test_faixas_imputadas.csv'
+) %>% 
+  mutate(survived = NA, .after = id)
+```
+
+
+# Uniformizar níveis dos fatores
+
+```{r}
+niveis_df <- reunir_niveis(df)
+niveis_df_prever <- reunir_niveis(df_prever)
+```
+
+Title:
+
+```{r}
+titulos <- base::union(
+  niveis_df$title, niveis_df_prever$title
+)
+```
+
+Embarked:
+
+```{r}
+portos <- base::union(
+  niveis_df$embarked, niveis_df_prever$embarked
+)
+```
+
+Completar:
+
+```{r}
+df <- df %>% 
+  mutate(title = fct_expand(title, titulos)) %>% 
+  mutate(embarked = fct_expand(embarked, portos))
+  
+df_prever <- df_prever %>% 
+  mutate(title = fct_expand(title, titulos)) %>% 
+  mutate(embarked = fct_expand(embarked, portos))
+```
+
+```{r}
+all(names(df) == names(df_prever))
+```
+
+
+# Split
+
+```{r}
+split <- initial_split(df, strata = survived)
+df_treino <- training(split)
+df_teste <- testing(split)
+```
+
+
+# Receita (só para preprocessamento)
+
+```{r}
+receita <- recipe(df_treino) %>% 
+  update_role(
+    pclass, sex, sib_sp, par_ch, embarked, faixa, title, 
+    new_role = 'predictor'
+  ) %>% 
+  update_role(survived, new_role = 'outcome') %>% 
+  update_role(id, name, new_role = 'id') %>% 
+  step_impute_mode(embarked) %>% 
+  step_dummy(
+    pclass, sex, embarked, faixa, title
+  ) %>% 
+  step_normalize(sib_sp, par_ch) %>% 
+  step_rm(ticket, fare, cabin, family)
+```
+
+```{r}
+df_treino_nn <- aplicar(receita)
+```
+
+```{r}
+df_teste_nn <- aplicar(receita, df_teste)
+```
+
+# Formatar entradas
+
+```{r}
+x_treino <- df_treino_nn %>% 
+  select(-c(id, survived, name)) %>% 
+  as.matrix()
+```
+
+```{r}
+y_treino <- df_treino_nn %>% 
+  pull(survived) %>% 
+  as.matrix()
+```
+
+# Treinar
+
+```{r}
+library(keras)
+```
+
+```{r}
+rede <- keras_model_sequential(input_shape = 25) %>%
+  layer_dense(200, activation = 'relu') %>%
+  layer_dense(100, activation = 'relu') %>%
+  layer_dense(50, activation = 'relu') %>%
+  layer_dense(1, activation = 'sigmoid')
+```
+
+```{r}
+rede %>% compile(
+  optimizer = optimizer_adam(),
+  loss = 'binary_crossentropy',
+  metrics = 'accuracy'
+)
+```
+
+```{r}
+historia <- rede %>% 
+  fit(
+    x_treino,
+    y_treino,
+    batch_size = 256,
+    epochs = 500, 
+    verbose = 0
+  )
+```
+
+```{r warning=FALSE}
+historia
+```
+
+
+# Testar
+
+```{r}
+x_teste <- df_teste_nn %>% 
+  select(-c(id, survived, name)) %>% 
+  as.matrix()
+```
+
+```{r}
+y_teste <- df_teste_nn %>% 
+  pull(survived) %>% 
+  as.matrix()
+```
+
+
+```{r}
+avaliacao <- evaluate(rede, x_teste, y_teste)
+avaliacao
+```
+
+
+# Prever
+
+```{r}
+df_prever_nn <- aplicar(receita, df_prever)
+```
+
+```{r}
+x_prever <- df_prever_nn %>% 
+  select(-c(id, survived, name)) %>% 
+  as.matrix()
+```
+
+```{r}
+previsoes <- predict(rede, x_prever)
+```
+
+
+# Montar submissão
+
+```{r}
+limite <- 0.5
+
+df_prever %>% 
+  select(PassengerId = id) %>% 
+  mutate(Survived = if_else(previsoes < limite, 0, 1)) %>% 
+  write_csv('dados/2023-11-26-keras.csv')
+```
+

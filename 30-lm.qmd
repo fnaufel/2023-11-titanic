@@ -29,11 +29,12 @@ format:
 
 ```{r setup}
 source('_setup.R')
+source('R/functions.R')
 ```
 
 # Objetivos
 
-???
+Fazer regressão logística: `survived ~ .`.
 
 
 # Usando só `train.csv`
@@ -41,8 +42,8 @@ source('_setup.R')
 ## Leitura
 
 ```{r}
-df <- read_csv(
-  'dados/train_limpo.csv'
+df <- ler(
+  'dados/train_faixas_imputadas.csv'
 ) %>% 
   mutate(survived = factor(survived))
 ```
@@ -80,157 +81,20 @@ wf
 
 ## Receita
 
-### Definindo id e resposta
-
 ```{r}
 receita <- recipe(treino) %>% 
-  update_role(id, new_role = 'id') %>% 
-  update_role(survived, new_role = 'outcome')
-```
-
-
-### Sexo, porto, bilhete, classe
-
-Sexo e porto de embarque como fatores.
-
-Bilhete com nível 'outros'.
-
-Classe como fator ordenado.
-
-```{r}
-receita <- receita %>% 
-  step_other(ticket, threshold = 2, other = 'outros') %>% 
-  step_mutate(pclass = fct_rev(ordered(pclass)))
-```
-
-Imputar porto por moda:
-
-```{r}
-receita <- receita %>% 
-  step_impute_mode(embarked)
-```
-
-
-### Nome, título, família
-
-```{r}
-extrair_familia <- function(s) {
-  str_split_i(s, ',[ ]*', 1)
-}
-
-extrair_titulo <- function(s) {
-  s <- str_split_i(s, ',[ ]*', 2)
-  str_split_i(s, stringr::fixed('.'), 1)
-}
-
-extrair_nome <- function(s) {
-  s <- str_split_i(s, ',[ ]*', 2)
-  s <- str_split_i(s, stringr::fixed('.'), 2)
-  str_trim(s)
-}
-```
-
-```{r}
-receita <- receita %>% 
-  step_mutate(
-    family = factor(extrair_familia(name)),
-    title_abbrev = factor(extrair_titulo(name))
-  ) %>% 
-  step_mutate(
-    name = extrair_nome(name),
-    role = 'id'
-  )
-```
-
-
-### Criar faixa etária
-
-Ainda vão sobrar misses sem idades, que serão imputadas depois.
-
-```{r}
-calcular_faixa <- function(age, tit) {
-  case_when(
-    !is.na(age) & age < 14 ~ 'child',
-    !is.na(age) & age >= 14 ~ 'adult',
-    is.na(age) & str_detect(tit, 'Miss') ~ NA_character_,
-    is.na(age) & str_detect(tit, 'Master') ~ 'child',
-    TRUE ~ 'adult'
-  )
-}
-
-receita <- receita %>% 
-  step_mutate(
-    faixa = factor(calcular_faixa(age, title_abbrev))
-  )
-```
-
-
-### Criar dummies
-
-Note que a coluna `title_abbrev` ainda era necessária para caclular a idade. Por isso só é seguro transformá-la em *dummy* aqui.
-
-Por outro lado, ainda não posso transformar `faixa` em *dummy*, pois ainda vou imputar valores faltantes.
-
-```{r}
-receita <- receita %>% 
-  step_dummy(
-    pclass, family, title_abbrev, sex, ticket, embarked
-  )
-```
-
-
-### Atribuir papéis
-
-```{r}
-receita <- receita %>% 
   update_role(
-    sib_sp, par_ch, fare,
+    pclass, sex, sib_sp, par_ch, embarked, faixa, title, 
     new_role = 'predictor'
   ) %>% 
-  update_role(
-    name, new_role = 'id'
-  )
+  update_role(survived, new_role = 'outcome') %>% 
+  update_role(id, name, new_role = 'id') %>% 
+  step_impute_mode(embarked) %>% 
+  step_dummy(
+    pclass, sex, embarked, faixa, title
+  ) %>% 
+  step_rm(ticket, fare, cabin)
 ```
-
-
-### Descartar colunas
-
-Colunas que sobraram:
-
-```{r}
-recipes_eval_select(
-  quos(has_role(NA)),
-  treino, 
-  summary(receita)
-)
-```
-
-Remover:
-
-```{r}
-receita <- receita %>% 
-  step_rm(age, cabin)
-```
-
-
-### Imputar faixa etária
-
-Note que este passo precisa dos outros preditores prontos.
-
-```{r}
-receita <- receita %>% 
-  step_impute_knn(faixa)
-```
-
-Finalmente, transformar `faixa` em *dummy*.
-
-```{r}
-receita <- receita %>% 
-  step_dummy(faixa)
-```
-
-
-### Resumo da receita
 
 ```{r}
 receita
@@ -244,15 +108,7 @@ summary(receita)
 ### Verificando a receita
 
 ```{r}
-df_transformado <- receita %>% 
-  prep(
-    treino,
-    fresh = TRUE,
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE
-  ) %>%
-  bake(new_data = NULL)
+df_transformado <- aplicar(receita)
 ```
 
 ```{r}
@@ -261,10 +117,6 @@ df_transformado
 
 ```{r}
 df_transformado %>% glimpse()
-```
-
-```{r eval=FALSE}
-df_transformado %>% dfSummary() %>% print(method = 'render')
 ```
 
 
@@ -293,8 +145,6 @@ modelo_treino <- wf %>% fit(treino)
 previsoes <- modelo_treino %>% predict(teste)
 ```
 
-Muitos avisos. Resolver depois.
-
 ```{r}
 teste %>% 
   bind_cols(previsoes) %>% 
@@ -313,7 +163,7 @@ modelo_tudo <- wf %>%
 ## Prever `test.csv` para submissão
 
 ```{r}
-teste_kaggle <- read_csv('dados/test_limpo.csv') 
+teste_kaggle <- ler('dados/test_faixas_imputadas.csv')
 ```
 
 ```{r}
@@ -329,7 +179,7 @@ df_submeter <- teste_kaggle %>%
 
 ```{r}
 df_submeter %>% 
-  write_csv('dados/2023-11-24-glmnet.csv')
+  write_csv('dados/2023-11-26-glmnet.csv')
 ```
 
 Uma das previsões deu NA!
@@ -338,6 +188,4 @@ Uma das previsões deu NA!
 df_submeter %>% 
   count(Survived)
 ```
-
-## Score: 0.77033
 

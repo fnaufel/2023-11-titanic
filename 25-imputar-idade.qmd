@@ -1,0 +1,479 @@
+---
+title: "Titanic competition: imputar idade (usando tudo)"
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+
+#bibliography: bibliography.bib
+#csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-depth: 3
+    theme: 
+      - journal
+      - _custom.scss
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+---
+
+{{< include _math.qmd >}}
+
+
+# Setup
+
+```{r setup}
+source('_setup.R')
+source('R/functions.R')
+```
+
+# Ler, juntar e aplicar receita
+
+```{r}
+df <- read_csv('dados/both_limpo.csv') %>% 
+  select(-survived)
+```
+
+```{r}
+df <- receita_pos_leitura(df) %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL)
+```
+
+```{r}
+df %>% glimpse()
+```
+
+```{r}
+df %>% dfSummary() %>% print(method = 'render')
+```
+
+
+# Títulos e idades
+
+```{r}
+df %>% 
+  ggplot(aes(fct_reorder(title, -age, .na_rm = TRUE), age)) +
+    geom_boxplot() +
+    geom_point(alpha = 0.3, size = 1, color = 'blue') +
+    scale_y_continuous(breaks = seq(0, 80, 5)) +
+    coord_flip() +
+    labs(x = NULL)
+```
+
+
+# Classes e idades
+
+```{r}
+df %>% 
+  ggplot(aes(fct_reorder(pclass, -age, .na_rm = TRUE), age)) +
+    geom_boxplot() +
+    geom_point(alpha = 0.3, size = 1, color = 'blue') +
+    scale_y_continuous(breaks = seq(0, 80, 5)) +
+    coord_flip() +
+    labs(x = NULL)
+```
+
+# Porto e idades
+
+```{r}
+df %>% 
+  ggplot(aes(fct_reorder(embarked, -age, .na_rm = TRUE), age)) +
+    geom_boxplot() +
+    geom_point(alpha = 0.3, size = 1, color = 'blue') +
+    scale_y_continuous(breaks = seq(0, 80, 5)) +
+    coord_flip() +
+    labs(x = NULL)
+```
+
+# Sexo e idades
+
+```{r}
+df %>% 
+  ggplot(aes(fct_reorder(sex, -age, .na_rm = TRUE), age)) +
+    geom_boxplot() +
+    geom_point(alpha = 0.3, size = 1, color = 'blue') +
+    scale_y_continuous(breaks = seq(0, 80, 5)) +
+    coord_flip() +
+    labs(x = NULL)
+```
+
+
+# Preparar e split
+
+* Imputar `embarked` faltantes como `S`:
+
+* Eliminar colunas desnecessárias.
+
+```{r}
+tudo <- df %>% 
+  mutate(embarked = if_else(is.na(embarked), 'S', embarked)) %>% 
+  filter(!is.na(age)) %>% 
+  select(-c(ticket, fare, cabin, family))
+
+split <- tudo %>% initial_split(strata = age)
+treino <- training(split)
+teste <- testing(split)
+```
+
+```{r}
+glimpse(tudo)
+```
+
+# Regressão linear para idade e faixa etária
+
+## Observações iniciais
+
+Na receita, vamos agrupar títulos menos usados em "other". Sem fazer isto, recebemos aviso "prediction from rank-deficient fit" na hora de prever.
+
+```{r}
+tudo %>% 
+  count(title, sort = TRUE)
+```
+
+
+## Um modelo só: age ~ .
+
+```{r}
+rec <- recipe(
+  treino,
+  formula = age ~ .
+) %>% 
+  update_role(id, name, new_role = 'id') %>% 
+  step_other(title, threshold = 10) %>% 
+  step_dummy(all_nominal_predictors())
+```
+
+```{r}
+wf <- workflow() %>% 
+  add_model(linear_reg(engine = 'lm')) %>% 
+  add_recipe(rec)
+```
+
+### Treinar
+
+```{r}
+wf_fit <- wf %>% 
+  fit(treino)
+```
+
+Ver previsões para os dados de treino:
+
+```{r}
+treino_com_preds <- wf_fit %>% extract_fit_engine() %>% augment()
+```
+
+```{r}
+treino_com_preds %>% glimpse()
+```
+
+```{r}
+treino_com_preds %>% 
+  ggplot(aes(..y, .fitted)) +
+    geom_point(alpha = 0.5) +
+    geom_abline(color = 'lightgreen') +
+    geom_smooth(method = 'lm', se = FALSE) +
+    coord_equal()
+```
+
+Não é um resultado muito bom.
+
+
+```{r}
+wf_fit %>% tidy() %>% select(term, estimate, p.value)
+```
+
+Resíduos:
+
+```{r}
+treino_com_preds %>% 
+  ggplot() +
+    stat_fitted_resid()
+```
+
+```{r}
+treino_com_preds %>% 
+  ggplot() +
+    stat_normal_qq()
+```
+
+```{r}
+treino_com_preds %>% 
+  ggplot() +
+    stat_resid_hist()
+```
+
+Vamos comparar faixas etárias:
+
+* idade < 14 : criança
+* idade >= 14: adulto
+
+```{r}
+calcular_faixa <- function(age, limite = 14) {
+  
+  rv <- case_when(
+    age < 14 ~ 'child', 
+    TRUE ~ 'adult'
+  )
+  
+  factor(rv)
+  
+}
+
+treino_faixas <- treino_com_preds %>% 
+  mutate(
+    faixa = calcular_faixa(..y),
+    faixa_pred = calcular_faixa(.fitted)
+  )
+```
+
+```{r}
+treino_faixas %>% 
+  accuracy(truth = faixa, estimate = faixa_pred)
+```
+
+Uma precisão boa.
+
+Quais são os erros?
+
+```{r}
+treino_faixas %>% 
+  filter(faixa != faixa_pred) %>% 
+  select(age = ..y, .fitted, faixa, faixa_pred) %>% 
+  arrange(age)
+```
+
+### Testar
+
+```{r}
+teste_com_preds <- 
+  wf_fit %>% 
+  predict(new_data = teste) %>% 
+  bind_cols(teste)
+```
+
+```{r}
+teste_com_preds %>% 
+  ggplot(aes(age, .pred)) +
+    geom_point(alpha = 0.5) +
+    geom_abline(color = 'lightgreen') +
+    geom_smooth(method = 'lm', se = FALSE) +
+    coord_equal()
+```
+
+```{r}
+teste_faixas <- teste_com_preds %>% 
+  mutate(
+    faixa = calcular_faixa(age),
+    faixa_pred = calcular_faixa(.pred)
+  )
+```
+
+```{r}
+teste_faixas %>% accuracy(truth = faixa, estimate = faixa_pred)
+```
+
+OK.
+
+
+### Treinar em tudo
+
+```{r}
+wf_fit_tudo <- wf %>% fit(tudo)
+```
+
+```{r}
+wf_fit_tudo
+```
+
+### Extrair previsões de idade e faixa
+
+```{r}
+tudo_com_preds <- wf_fit_tudo %>% 
+  augment(tudo)
+```
+
+```{r}
+tudo_com_preds %>% 
+  ggplot(aes(age, .pred)) +
+    geom_point(alpha = 0.5) +
+    geom_abline(color = 'lightgreen') +
+    geom_smooth(method = 'lm', se = FALSE) +
+    coord_equal()
+```
+
+```{r}
+tudo_faixas <- tudo_com_preds %>% 
+  mutate(
+    faixa = calcular_faixa(age),
+    faixa_pred = calcular_faixa(.pred)
+  )
+```
+
+```{r}
+tudo_faixas %>% accuracy(truth = faixa, estimate = faixa_pred)
+```
+
+
+### Imputar e gravar 
+
+Treino:
+
+```{r}
+df_train <- read_csv('dados/train_limpo.csv') %>% 
+  receita_pos_leitura() %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL)
+
+df_train_com_idade <- df_train %>% filter(!is.na(age))
+df_train_sem_idade <- df_train %>% filter(is.na(age)) %>% select(-age)
+```
+
+```{r}
+previsoes_train_sem_idade <- wf_fit_tudo %>% 
+  predict(df_train_sem_idade)
+```
+
+```{r}
+idades_imputadas <- df_train_sem_idade %>% 
+  bind_cols(previsoes_train_sem_idade) %>% 
+  mutate(
+    age = .pred,
+    faixa = calcular_faixa(.pred)
+  ) %>% 
+  select(id, faixa)
+```
+
+Adicionar faixa a quem já tem idade:
+
+```{r}
+df_train_com_faixa <- df_train_com_idade %>% 
+  mutate(
+    faixa = calcular_faixa(age)
+  ) %>% 
+  select(-age)
+```
+
+Gravar:
+
+```{r}
+df_train_sem_idade %>% 
+  left_join(idades_imputadas, by = 'id') %>% 
+  bind_rows(df_train_com_faixa) %>% 
+  arrange(id) %>% 
+  write_csv(
+    'dados/train_faixas_imputadas.csv'
+  )
+```
+
+Ler e resumir:
+
+```{r}
+read_csv('dados/train_faixas_imputadas.csv') %>% 
+  receita_pos_leitura() %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL) %>% 
+  dfSummary() %>% print(method = 'render')
+```
+
+
+
+Teste:
+
+```{r}
+df_test <- read_csv('dados/test_limpo.csv') %>% 
+  receita_pos_leitura() %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL)
+
+df_test_com_idade <- df_test %>% filter(!is.na(age))
+df_test_sem_idade <- df_test %>% filter(is.na(age)) %>% select(-age)
+```
+
+```{r}
+previsoes_test_sem_idade <- wf_fit_tudo %>% 
+  predict(df_test_sem_idade)
+```
+
+```{r}
+idades_imputadas <- df_test_sem_idade %>% 
+  bind_cols(previsoes_test_sem_idade) %>% 
+  mutate(
+    age = .pred,
+    faixa = calcular_faixa(.pred)
+  ) %>% 
+  select(id, faixa)
+```
+
+Adicionar faixa a quem já tem idade:
+
+```{r}
+df_test_com_faixa <- df_test_com_idade %>% 
+  mutate(
+    faixa = calcular_faixa(age)
+  ) %>% 
+  select(-age)
+```
+
+Gravar:
+
+```{r}
+df_test_sem_idade %>% 
+  left_join(idades_imputadas, by = 'id') %>% 
+  bind_rows(df_test_com_faixa) %>% 
+  arrange(id) %>% 
+  write_csv(
+    'dados/test_faixas_imputadas.csv'
+  )
+```
+
+Ler e resumir:
+
+```{r}
+read_csv('dados/test_faixas_imputadas.csv') %>% 
+  receita_pos_leitura() %>% 
+  prep(
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE,
+  ) %>% 
+  bake(new_data = NULL) %>% 
+  dfSummary() %>% print(method = 'render')
+```
+
+
+::: {.callout-important}
+
+## Por que name e title estão NA?
+
+Porque a receita pós-leitura espera a coluna name original e não espera title nem family.
+
+Para gravar, usar os dfs lidos originais, antes da receita.
+
+:::

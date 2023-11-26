@@ -22,7 +22,6 @@ extrair_nome <- function(s) {
 receita_pos_leitura <- function(df) {
   
   recipe(df) %>% 
-    step_mutate(survived = survived == 1) %>% 
     step_mutate(pclass = fct_rev(ordered(pclass))) %>% 
     step_mutate(
       family = extrair_familia(name),

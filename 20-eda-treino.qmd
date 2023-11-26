@@ -49,7 +49,8 @@ df <- receita_pos_leitura(df) %>%
     log_changes = TRUE,
     strings_as_factors = FALSE,
   ) %>% 
-  bake(new_data = NULL)
+  bake(new_data = NULL) %>% 
+  mutate(survived = survived == 1)
 ```
 
 ```{r}

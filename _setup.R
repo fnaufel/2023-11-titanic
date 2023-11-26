@@ -171,6 +171,7 @@ theme_set(
 
 library(tidymodels)
 tidymodels_prefer()
+library(gglm) # for residual analysis in lm
 
 # Links to docs: LEAVE HERE AT THE END ------------------------------------
 

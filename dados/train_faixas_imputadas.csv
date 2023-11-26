@@ -1,0 +1,892 @@
+id,survived,pclass,name,sex,sib_sp,par_ch,ticket,fare,cabin,embarked,family,title,faixa
+1,0,3,Owen Harris,M,1,0,A/5 21171,7.25,NA,S,Braund,Mr,adult
+2,1,1,John Bradley (Florence Briggs Thayer),F,1,0,PC 17599,71.2833,C85,C,Cumings,Mrs,adult
+3,1,3,Laina,F,0,0,STON/O2. 3101282,7.925,NA,S,Heikkinen,Miss,adult
+4,1,1,Jacques Heath (Lily May Peel),F,1,0,113803,53.1,C123,S,Futrelle,Mrs,adult
+5,0,3,William Henry,M,0,0,373450,8.05,NA,S,Allen,Mr,adult
+6,0,3,James,M,0,0,330877,8.4583,NA,Q,Moran,Mr,adult
+7,0,1,Timothy J,M,0,0,17463,51.8625,E46,S,McCarthy,Mr,adult
+8,0,3,Gosta Leonard,M,3,1,349909,21.075,NA,S,Palsson,Master,child
+9,1,3,Oscar W (Elisabeth Vilhelmina Berg),F,0,2,347742,11.1333,NA,S,Johnson,Mrs,adult
+10,1,2,Nicholas (Adele Achem),F,1,0,237736,30.0708,NA,C,Nasser,Mrs,adult
+11,1,3,Marguerite Rut,F,1,1,PP 9549,16.7,G6,S,Sandstrom,Miss,child
+12,1,1,Elizabeth,F,0,0,113783,26.55,C103,S,Bonnell,Miss,adult
+13,0,3,William Henry,M,0,0,A/5. 2151,8.05,NA,S,Saundercock,Mr,adult
+14,0,3,Anders Johan,M,1,5,347082,31.275,NA,S,Andersson,Mr,adult
+15,0,3,Hulda Amanda Adolfina,F,0,0,350406,7.8542,NA,S,Vestrom,Miss,adult
+16,1,2,(Mary D Kingcome),F,0,0,248706,16,NA,S,Hewlett,Mrs,adult
+17,0,3,Eugene,M,4,1,382652,29.125,NA,Q,Rice,Master,child
+18,1,2,Charles Eugene,M,0,0,244373,13,NA,S,Williams,Mr,adult
+19,0,3,Julius (Emelia Maria Vandemoortele),F,1,0,345763,18,NA,S,Vander Planke,Mrs,adult
+20,1,3,Fatima,F,0,0,2649,7.225,NA,C,Masselmani,Mrs,adult
+21,0,2,Joseph J,M,0,0,239865,26,NA,S,Fynney,Mr,adult
+22,1,2,Lawrence,M,0,0,248698,13,D56,S,Beesley,Mr,adult
+23,1,3,"Anna ""Annie""",F,0,0,330923,8.0292,NA,Q,McGowan,Miss,adult
+24,1,1,William Thompson,M,0,0,113788,35.5,A6,S,Sloper,Mr,adult
+25,0,3,Torborg Danira,F,3,1,349909,21.075,NA,S,Palsson,Miss,child
+26,1,3,Carl Oscar (Selma Augusta Emilia Johansson),F,1,5,347077,31.3875,NA,S,Asplund,Mrs,adult
+27,0,3,Farred Chehab,M,0,0,2631,7.225,NA,C,Emir,Mr,adult
+28,0,1,Charles Alexander,M,3,2,19950,263,C23 C25 C27,S,Fortune,Mr,adult
+29,1,3,"Ellen ""Nellie""",F,0,0,330959,7.8792,NA,Q,O'Dwyer,Miss,adult
+30,0,3,Lalio,M,0,0,349216,7.8958,NA,S,Todoroff,Mr,adult
+31,0,1,Manuel E,M,0,0,PC 17601,27.7208,NA,C,Uruchurtu,Don,adult
+32,1,1,William Augustus (Marie Eugenie),F,1,0,PC 17569,146.5208,B78,C,Spencer,Mrs,adult
+33,1,3,Mary Agatha,F,0,0,335677,7.75,NA,Q,Glynn,Miss,adult
+34,0,2,Edward H,M,0,0,C.A. 24579,10.5,NA,S,Wheadon,Mr,adult
+35,0,1,Edgar Joseph,M,1,0,PC 17604,82.1708,NA,C,Meyer,Mr,adult
+36,0,1,Alexander Oskar,M,1,0,113789,52,NA,S,Holverson,Mr,adult
+37,1,3,Hanna,M,0,0,2677,7.2292,NA,C,Mamee,Mr,adult
+38,0,3,Ernest Charles,M,0,0,A./5. 2152,8.05,NA,S,Cann,Mr,adult
+39,0,3,Augusta Maria,F,2,0,345764,18,NA,S,Vander Planke,Miss,adult
+40,1,3,Jamila,F,1,0,2651,11.2417,NA,C,Nicola-Yarred,Miss,adult
+41,0,3,Johan (Johanna Persdotter Larsson),F,1,0,7546,9.475,NA,S,Ahlin,Mrs,adult
+42,0,2,William John Robert (Dorothy Ann Wonnacott),F,1,0,11668,21,NA,S,Turpin,Mrs,adult
+43,0,3,Theodor,M,0,0,349253,7.8958,NA,C,Kraeff,Mr,adult
+44,1,2,Simonne Marie Anne Andree,F,1,2,SC/Paris 2123,41.5792,NA,C,Laroche,Miss,child
+45,1,3,Margaret Delia,F,0,0,330958,7.8792,NA,Q,Devaney,Miss,adult
+46,0,3,William John,M,0,0,S.C./A.4. 23567,8.05,NA,S,Rogers,Mr,adult
+47,0,3,Denis,M,1,0,370371,15.5,NA,Q,Lennon,Mr,adult
+48,1,3,Bridget,F,0,0,14311,7.75,NA,Q,O'Driscoll,Miss,adult
+49,0,3,Youssef,M,2,0,2662,21.6792,NA,C,Samaan,Mr,adult
+50,0,3,Josef (Josefine Franchi),F,1,0,349237,17.8,NA,S,Arnold-Franchi,Mrs,adult
+51,0,3,Juha Niilo,M,4,1,3101295,39.6875,NA,S,Panula,Master,child
+52,0,3,Richard Cater,M,0,0,A/4. 39886,7.8,NA,S,Nosworthy,Mr,adult
+53,1,1,Henry Sleeper (Myna Haxtun),F,1,0,PC 17572,76.7292,D33,C,Harper,Mrs,adult
+54,1,2,Lizzie (Elizabeth Anne Wilkinson),F,1,0,2926,26,NA,S,Faunthorpe,Mrs,adult
+55,0,1,Engelhart Cornelius,M,0,1,113509,61.9792,B30,C,Ostby,Mr,adult
+56,1,1,Hugh,M,0,0,19947,35.5,C52,S,Woolner,Mr,adult
+57,1,2,Emily,F,0,0,C.A. 31026,10.5,NA,S,Rugg,Miss,adult
+58,0,3,Mansouer,M,0,0,2697,7.2292,NA,C,Novel,Mr,adult
+59,1,2,Constance Mirium,F,1,2,C.A. 34651,27.75,NA,S,West,Miss,child
+60,0,3,William Frederick,M,5,2,CA 2144,46.9,NA,S,Goodwin,Master,child
+61,0,3,Orsen,M,0,0,2669,7.2292,NA,C,Sirayanian,Mr,adult
+62,1,1,Amelie,F,0,0,113572,80,B28,NA,Icard,Miss,adult
+63,0,1,Henry Birkhardt,M,1,0,36973,83.475,C83,S,Harris,Mr,adult
+64,0,3,Harald,M,3,2,347088,27.9,NA,S,Skoog,Master,child
+65,0,1,Albert A,M,0,0,PC 17605,27.7208,NA,C,Stewart,Mr,adult
+66,1,3,Gerios,M,1,1,2661,15.2458,NA,C,Moubarek,Master,child
+67,1,2,(Elizabeth Ramell),F,0,0,C.A. 29395,10.5,F33,S,Nye,Mrs,adult
+68,0,3,Ernest James,M,0,0,S.P. 3464,8.1583,NA,S,Crease,Mr,adult
+69,1,3,Erna Alexandra,F,4,2,3101281,7.925,NA,S,Andersson,Miss,adult
+70,0,3,Vincenz,M,2,0,315151,8.6625,NA,S,Kink,Mr,adult
+71,0,2,Stephen Curnow,M,0,0,C.A. 33111,10.5,NA,S,Jenkin,Mr,adult
+72,0,3,Lillian Amy,F,5,2,CA 2144,46.9,NA,S,Goodwin,Miss,adult
+73,0,2,Ambrose Jr,M,0,0,S.O.C. 14879,73.5,NA,S,Hood,Mr,adult
+74,0,3,Apostolos,M,1,0,2680,14.4542,NA,C,Chronopoulos,Mr,adult
+75,1,3,Lee,M,0,0,1601,56.4958,NA,S,Bing,Mr,adult
+76,0,3,Sigurd Hansen,M,0,0,348123,7.65,F G73,S,Moen,Mr,adult
+77,0,3,Ivan,M,0,0,349208,7.8958,NA,S,Staneff,Mr,adult
+78,0,3,Rahamin Haim,M,0,0,374746,8.05,NA,S,Moutal,Mr,adult
+79,1,2,Alden Gates,M,0,2,248738,29,NA,S,Caldwell,Master,child
+80,1,3,Elizabeth,F,0,0,364516,12.475,NA,S,Dowdell,Miss,adult
+81,0,3,Achille,M,0,0,345767,9,NA,S,Waelens,Mr,adult
+82,1,3,Jan Baptist,M,0,0,345779,9.5,NA,S,Sheerlinck,Mr,adult
+83,1,3,Brigdet Delia,F,0,0,330932,7.7875,NA,Q,McDermott,Miss,adult
+84,0,1,Francisco M,M,0,0,113059,47.1,NA,S,Carrau,Mr,adult
+85,1,2,Bertha,F,0,0,SO/C 14885,10.5,NA,S,Ilett,Miss,adult
+86,1,3,Karl Alfred (Maria Mathilda Gustafsson),F,3,0,3101278,15.85,NA,S,Backstrom,Mrs,adult
+87,0,3,William Neal,M,1,3,W./C. 6608,34.375,NA,S,Ford,Mr,adult
+88,0,3,Selman Francis,M,0,0,SOTON/OQ 392086,8.05,NA,S,Slocovski,Mr,adult
+89,1,1,Mabel Helen,F,3,2,19950,263,C23 C25 C27,S,Fortune,Miss,adult
+90,0,3,Francesco,M,0,0,343275,8.05,NA,S,Celotti,Mr,adult
+91,0,3,Emil,M,0,0,343276,8.05,NA,S,Christmann,Mr,adult
+92,0,3,Paul Edvin,M,0,0,347466,7.8542,NA,S,Andreasson,Mr,adult
+93,0,1,Herbert Fuller,M,1,0,W.E.P. 5734,61.175,E31,S,Chaffee,Mr,adult
+94,0,3,Bertram Frank,M,1,2,C.A. 2315,20.575,NA,S,Dean,Mr,adult
+95,0,3,Daniel,M,0,0,364500,7.25,NA,S,Coxon,Mr,adult
+96,0,3,Charles Joseph,M,0,0,374910,8.05,NA,S,Shorney,Mr,adult
+97,0,1,George B,M,0,0,PC 17754,34.6542,A5,C,Goldschmidt,Mr,adult
+98,1,1,William Bertram,M,0,1,PC 17759,63.3583,D10 D12,C,Greenfield,Mr,adult
+99,1,2,John T (Ada Julia Bone),F,0,1,231919,23,NA,S,Doling,Mrs,adult
+100,0,2,Sinai,M,1,0,244367,26,NA,S,Kantor,Mr,adult
+101,0,3,Matilda,F,0,0,349245,7.8958,NA,S,Petranec,Miss,adult
+102,0,3,"Pastcho (""Pentcho"")",M,0,0,349215,7.8958,NA,S,Petroff,Mr,adult
+103,0,1,Richard Frasar,M,0,1,35281,77.2875,D26,S,White,Mr,adult
+104,0,3,Gustaf Joel,M,0,0,7540,8.6542,NA,S,Johansson,Mr,adult
+105,0,3,Anders Vilhelm,M,2,0,3101276,7.925,NA,S,Gustafsson,Mr,adult
+106,0,3,Stoytcho,M,0,0,349207,7.8958,NA,S,Mionoff,Mr,adult
+107,1,3,Anna Kristine,F,0,0,343120,7.65,NA,S,Salkjelsvik,Miss,adult
+108,1,3,Albert Johan,M,0,0,312991,7.775,NA,S,Moss,Mr,adult
+109,0,3,Tido,M,0,0,349249,7.8958,NA,S,Rekic,Mr,adult
+110,1,3,Bertha,F,1,0,371110,24.15,NA,Q,Moran,Miss,adult
+111,0,1,Walter Chamberlain,M,0,0,110465,52,C110,S,Porter,Mr,adult
+112,0,3,Hileni,F,1,0,2665,14.4542,NA,C,Zabour,Miss,adult
+113,0,3,David John,M,0,0,324669,8.05,NA,S,Barton,Mr,adult
+114,0,3,Katriina,F,1,0,4136,9.825,NA,S,Jussila,Miss,adult
+115,0,3,Malake,F,0,0,2627,14.4583,NA,C,Attalah,Miss,adult
+116,0,3,Edvard,M,0,0,STON/O 2. 3101294,7.925,NA,S,Pekoniemi,Mr,adult
+117,0,3,Patrick,M,0,0,370369,7.75,NA,Q,Connors,Mr,adult
+118,0,2,William John Robert,M,1,0,11668,21,NA,S,Turpin,Mr,adult
+119,0,1,Quigg Edmond,M,0,1,PC 17558,247.5208,B58 B60,C,Baxter,Mr,adult
+120,0,3,Ellis Anna Maria,F,4,2,347082,31.275,NA,S,Andersson,Miss,child
+121,0,2,Stanley George,M,2,0,S.O.C. 14879,73.5,NA,S,Hickman,Mr,adult
+122,0,3,Leonard Charles,M,0,0,A4. 54510,8.05,NA,S,Moore,Mr,adult
+123,0,2,Nicholas,M,1,0,237736,30.0708,NA,C,Nasser,Mr,adult
+124,1,2,Susan,F,0,0,27267,13,E101,S,Webber,Miss,adult
+125,0,1,Percival Wayland,M,0,1,35281,77.2875,D26,S,White,Mr,adult
+126,1,3,Elias,M,1,0,2651,11.2417,NA,C,Nicola-Yarred,Master,child
+127,0,3,Martin,M,0,0,370372,7.75,NA,Q,McMahon,Mr,adult
+128,1,3,Fridtjof Arne,M,0,0,C 17369,7.1417,NA,S,Madsen,Mr,adult
+129,1,3,Anna,F,1,1,2668,22.3583,F E69,C,Peter,Miss,adult
+130,0,3,Johan,M,0,0,347061,6.975,NA,S,Ekstrom,Mr,adult
+131,0,3,Jozef,M,0,0,349241,7.8958,NA,C,Drazenoic,Mr,adult
+132,0,3,Domingos Fernandeo,M,0,0,SOTON/O.Q. 3101307,7.05,NA,S,Coelho,Mr,adult
+133,0,3,Alexander A (Grace Charity Laury),F,1,0,A/5. 3337,14.5,NA,S,Robins,Mrs,adult
+134,1,2,Leopold (Mathilde Francoise Pede),F,1,0,228414,26,NA,S,Weisz,Mrs,adult
+135,0,2,Samuel James Hayden,M,0,0,C.A. 29178,13,NA,S,Sobey,Mr,adult
+136,0,2,Emile,M,0,0,SC/PARIS 2133,15.0458,NA,C,Richard,Mr,adult
+137,1,1,Helen Monypeny,F,0,2,11752,26.2833,D47,S,Newsom,Miss,adult
+138,0,1,Jacques Heath,M,1,0,113803,53.1,C123,S,Futrelle,Mr,adult
+139,0,3,Olaf Elon,M,0,0,7534,9.2167,NA,S,Osen,Mr,adult
+140,0,1,Victor,M,0,0,PC 17593,79.2,B86,C,Giglio,Mr,adult
+141,0,3,Joseph (Sultana),F,0,2,2678,15.2458,NA,C,Boulos,Mrs,adult
+142,1,3,Anna Sofia,F,0,0,347081,7.75,NA,S,Nysten,Miss,adult
+143,1,3,Pekka Pietari (Elin Matilda Dolck),F,1,0,STON/O2. 3101279,15.85,NA,S,Hakkarainen,Mrs,adult
+144,0,3,Jeremiah,M,0,0,365222,6.75,NA,Q,Burke,Mr,adult
+145,0,2,Edgardo Samuel,M,0,0,231945,11.5,NA,S,Andrew,Mr,adult
+146,0,2,Joseph Charles,M,1,1,C.A. 33112,36.75,NA,S,Nicholls,Mr,adult
+147,1,3,"August Edvard (""Wennerstrom"")",M,0,0,350043,7.7958,NA,S,Andersson,Mr,adult
+148,0,3,"Robina Maggie ""Ruby""",F,2,2,W./C. 6608,34.375,NA,S,Ford,Miss,child
+149,0,2,"Michel (""Louis M Hoffman"")",M,0,2,230080,26,F2,S,Navratil,Mr,adult
+150,0,2,Thomas Roussel Davids,M,0,0,244310,13,NA,S,Byles,Rev,adult
+151,0,2,Robert James,M,0,0,S.O.P. 1166,12.525,NA,S,Bateman,Rev,adult
+152,1,1,Thomas (Edith Wearne),F,1,0,113776,66.6,C2,S,Pears,Mrs,adult
+153,0,3,Alfonzo,M,0,0,A.5. 11206,8.05,NA,S,Meo,Mr,adult
+154,0,3,Austin Blyler,M,0,2,A/5. 851,14.5,NA,S,van Billiard,Mr,adult
+155,0,3,Ole Martin,M,0,0,Fa 265302,7.3125,NA,S,Olsen,Mr,adult
+156,0,1,Charles Duane,M,0,1,PC 17597,61.3792,NA,C,Williams,Mr,adult
+157,1,3,"Katherine ""Katie""",F,0,0,35851,7.7333,NA,Q,Gilnagh,Miss,adult
+158,0,3,Harry,M,0,0,SOTON/OQ 392090,8.05,NA,S,Corn,Mr,adult
+159,0,3,Mile,M,0,0,315037,8.6625,NA,S,Smiljanic,Mr,adult
+160,0,3,Thomas Henry,M,8,2,CA. 2343,69.55,NA,S,Sage,Master,child
+161,0,3,John Hatfield,M,0,1,371362,16.1,NA,S,Cribb,Mr,adult
+162,1,2,"James (Elizabeth ""Bessie"" Inglis Milne)",F,0,0,C.A. 33595,15.75,NA,S,Watt,Mrs,adult
+163,0,3,John Viktor,M,0,0,347068,7.775,NA,S,Bengtsson,Mr,adult
+164,0,3,Jovo,M,0,0,315093,8.6625,NA,S,Calic,Mr,adult
+165,0,3,Eino Viljami,M,4,1,3101295,39.6875,NA,S,Panula,Master,child
+166,1,3,"Frank John William ""Frankie""",M,0,2,363291,20.525,NA,S,Goldsmith,Master,child
+167,1,1,(Edith Martha Bowerman),F,0,1,113505,55,E33,S,Chibnall,Mrs,adult
+168,0,3,William (Anna Bernhardina Karlsson),F,1,4,347088,27.9,NA,S,Skoog,Mrs,adult
+169,0,1,John D,M,0,0,PC 17318,25.925,NA,S,Baumann,Mr,adult
+170,0,3,Lee,M,0,0,1601,56.4958,NA,S,Ling,Mr,adult
+171,0,1,Wyckoff,M,0,0,111240,33.5,B19,S,Van der hoef,Mr,adult
+172,0,3,Arthur,M,4,1,382652,29.125,NA,Q,Rice,Master,child
+173,1,3,Eleanor Ileen,F,1,1,347742,11.1333,NA,S,Johnson,Miss,child
+174,0,3,Antti Wilhelm,M,0,0,STON/O 2. 3101280,7.925,NA,S,Sivola,Mr,adult
+175,0,1,James Clinch,M,0,0,17764,30.6958,A7,C,Smith,Mr,adult
+176,0,3,Klas Albin,M,1,1,350404,7.8542,NA,S,Klasen,Mr,adult
+177,0,3,Henry Forbes,M,3,1,4133,25.4667,NA,S,Lefebre,Master,child
+178,0,1,Ann Elizabeth,F,0,0,PC 17595,28.7125,C49,C,Isham,Miss,adult
+179,0,2,Reginald,M,0,0,250653,13,NA,S,Hale,Mr,adult
+180,0,3,Lionel,M,0,0,LINE,0,NA,S,Leonard,Mr,adult
+181,0,3,Constance Gladys,F,8,2,CA. 2343,69.55,NA,S,Sage,Miss,child
+182,0,2,Rene,M,0,0,SC/PARIS 2131,15.05,NA,C,Pernot,Mr,adult
+183,0,3,Clarence Gustaf Hugo,M,4,2,347077,31.3875,NA,S,Asplund,Master,child
+184,1,2,Richard F,M,2,1,230136,39,F4,S,Becker,Master,child
+185,1,3,Luise Gretchen,F,0,2,315153,22.025,NA,S,Kink-Heilmann,Miss,child
+186,0,1,Hugh Roscoe,M,0,0,113767,50,A32,S,Rood,Mr,adult
+187,1,3,"Thomas (Johanna ""Hannah"" Godfrey)",F,1,0,370365,15.5,NA,Q,O'Brien,Mrs,adult
+188,1,1,"Charles Hallace (""Mr C Rolmane"")",M,0,0,111428,26.55,NA,S,Romaine,Mr,adult
+189,0,3,John,M,1,1,364849,15.5,NA,Q,Bourke,Mr,adult
+190,0,3,Stjepan,M,0,0,349247,7.8958,NA,S,Turcin,Mr,adult
+191,1,2,(Rosa),F,0,0,234604,13,NA,S,Pinsky,Mrs,adult
+192,0,2,William,M,0,0,28424,13,NA,S,Carbines,Mr,adult
+193,1,3,Carla Christine Nielsine,F,1,0,350046,7.8542,NA,S,Andersen-Jensen,Miss,adult
+194,1,2,Michel M,M,1,1,230080,26,F2,S,Navratil,Master,child
+195,1,1,James Joseph (Margaret Tobin),F,0,0,PC 17610,27.7208,B4,C,Brown,Mrs,adult
+196,1,1,Elise,F,0,0,PC 17569,146.5208,B80,C,Lurette,Miss,adult
+197,0,3,Robert,M,0,0,368703,7.75,NA,Q,Mernagh,Mr,adult
+198,0,3,Karl Siegwart Andreas,M,0,1,4579,8.4042,NA,S,Olsen,Mr,adult
+199,1,3,"Margaret ""Maggie""",F,0,0,370370,7.75,NA,Q,Madigan,Miss,adult
+200,0,2,"Henriette (""Mrs Harbeck"")",F,0,0,248747,13,NA,S,Yrois,Miss,adult
+201,0,3,Nestor Cyriel,M,0,0,345770,9.5,NA,S,Vande Walle,Mr,adult
+202,0,3,Frederick,M,8,2,CA. 2343,69.55,NA,S,Sage,Mr,adult
+203,0,3,Jakob Alfred,M,0,0,3101264,6.4958,NA,S,Johanson,Mr,adult
+204,0,3,Gerious,M,0,0,2628,7.225,NA,C,Youseff,Mr,adult
+205,1,3,"Gurshon ""Gus""",M,0,0,A/5 3540,8.05,NA,S,Cohen,Mr,adult
+206,0,3,Telma Matilda,F,0,1,347054,10.4625,G6,S,Strom,Miss,child
+207,0,3,Karl Alfred,M,1,0,3101278,15.85,NA,S,Backstrom,Mr,adult
+208,1,3,Nassef Cassem,M,0,0,2699,18.7875,NA,C,Albimona,Mr,adult
+209,1,3,"Helen ""Ellen""",F,0,0,367231,7.75,NA,Q,Carr,Miss,adult
+210,1,1,Henry,M,0,0,112277,31,A31,C,Blank,Mr,adult
+211,0,3,Ahmed,M,0,0,SOTON/O.Q. 3101311,7.05,NA,S,Ali,Mr,adult
+212,1,2,Clear Annie,F,0,0,F.C.C. 13528,21,NA,S,Cameron,Miss,adult
+213,0,3,John Henry,M,0,0,A/5 21174,7.25,NA,S,Perkin,Mr,adult
+214,0,2,Hans Kristensen,M,0,0,250646,13,NA,S,Givard,Mr,adult
+215,0,3,Philip,M,1,0,367229,7.75,NA,Q,Kiernan,Mr,adult
+216,1,1,Madeleine,F,1,0,35273,113.275,D36,C,Newell,Miss,adult
+217,1,3,Eliina,F,0,0,STON/O2. 3101283,7.925,NA,S,Honkanen,Miss,adult
+218,0,2,Sidney Samuel,M,1,0,243847,27,NA,S,Jacobsohn,Mr,adult
+219,1,1,Albina,F,0,0,11813,76.2917,D15,C,Bazzani,Miss,adult
+220,0,2,Walter,M,0,0,W/C 14208,10.5,NA,S,Harris,Mr,adult
+221,1,3,Victor Francis,M,0,0,SOTON/OQ 392089,8.05,NA,S,Sunderland,Mr,adult
+222,0,2,James H,M,0,0,220367,13,NA,S,Bracken,Mr,adult
+223,0,3,George Henry,M,0,0,21440,8.05,NA,S,Green,Mr,adult
+224,0,3,Christo,M,0,0,349234,7.8958,NA,S,Nenkoff,Mr,adult
+225,1,1,Frederick Maxfield,M,1,0,19943,90,C93,S,Hoyt,Mr,adult
+226,0,3,Karl Ivar Sven,M,0,0,PP 4348,9.35,NA,S,Berglund,Mr,adult
+227,1,2,William John,M,0,0,SW/PP 751,10.5,NA,S,Mellors,Mr,adult
+228,0,3,"John Hall (""Henry"")",M,0,0,A/5 21173,7.25,NA,S,Lovell,Mr,adult
+229,0,2,Arne Jonas,M,0,0,236171,13,NA,S,Fahlstrom,Mr,adult
+230,0,3,Mathilde,F,3,1,4133,25.4667,NA,S,Lefebre,Miss,child
+231,1,1,Henry Birkhardt (Irene Wallach),F,1,0,36973,83.475,C83,S,Harris,Mrs,adult
+232,0,3,Bengt Edvin,M,0,0,347067,7.775,NA,S,Larsson,Mr,adult
+233,0,2,Ernst Adolf,M,0,0,237442,13.5,NA,S,Sjostedt,Mr,adult
+234,1,3,Lillian Gertrud,F,4,2,347077,31.3875,NA,S,Asplund,Miss,child
+235,0,2,Robert William Norman,M,0,0,C.A. 29566,10.5,NA,S,Leyson,Mr,adult
+236,0,3,Alice Phoebe,F,0,0,W./C. 6609,7.55,NA,S,Harknett,Miss,adult
+237,0,2,Stephen,M,1,0,26707,26,NA,S,Hold,Mr,adult
+238,1,2,"Marjorie ""Lottie""",F,0,2,C.A. 31921,26.25,NA,S,Collyer,Miss,child
+239,0,2,Frederick William,M,0,0,28665,10.5,NA,S,Pengelly,Mr,adult
+240,0,2,George Henry,M,0,0,SCO/W 1585,12.275,NA,S,Hunt,Mr,adult
+241,0,3,Thamine,F,1,0,2665,14.4542,NA,C,Zabour,Miss,adult
+242,1,3,"Katherine ""Kate""",F,1,0,367230,15.5,NA,Q,Murphy,Miss,adult
+243,0,2,Reginald Charles,M,0,0,W./C. 14263,10.5,NA,S,Coleridge,Mr,adult
+244,0,3,Matti Alexanteri,M,0,0,STON/O 2. 3101275,7.125,NA,S,Maenpaa,Mr,adult
+245,0,3,Sleiman,M,0,0,2694,7.225,NA,C,Attalah,Mr,adult
+246,0,1,William Edward,M,2,0,19928,90,C78,Q,Minahan,Dr,adult
+247,0,3,Agda Thorilda Viktoria,F,0,0,347071,7.775,NA,S,Lindahl,Miss,adult
+248,1,2,William (Anna),F,0,2,250649,14.5,NA,S,Hamalainen,Mrs,adult
+249,1,1,Richard Leonard,M,1,1,11751,52.5542,D35,S,Beckwith,Mr,adult
+250,0,2,Ernest Courtenay,M,1,0,244252,26,NA,S,Carter,Rev,adult
+251,0,3,James George,M,0,0,362316,7.25,NA,S,Reed,Mr,adult
+252,0,3,Wilhelm (Elna Matilda Persson),F,1,1,347054,10.4625,G6,S,Strom,Mrs,adult
+253,0,1,William Thomas,M,0,0,113514,26.55,C87,S,Stead,Mr,adult
+254,0,3,William Arthur,M,1,0,A/5. 3336,16.1,NA,S,Lobb,Mr,adult
+255,0,3,Viktor (Helena Wilhelmina),F,0,2,370129,20.2125,NA,S,Rosblom,Mrs,adult
+256,1,3,Darwis (Hanne Youssef Razi),F,0,2,2650,15.2458,NA,C,Touma,Mrs,adult
+257,1,1,Gertrude Maybelle,F,0,0,PC 17585,79.2,NA,C,Thorne,Mrs,adult
+258,1,1,Gladys,F,0,0,110152,86.5,B77,S,Cherry,Miss,adult
+259,1,1,Anna,F,0,0,PC 17755,512.3292,NA,C,Ward,Miss,adult
+260,1,2,(Lutie Davis),F,0,1,230433,26,NA,S,Parrish,Mrs,adult
+261,0,3,Thomas,M,0,0,384461,7.75,NA,Q,Smith,Mr,adult
+262,1,3,Edvin Rojj Felix,M,4,2,347077,31.3875,NA,S,Asplund,Master,child
+263,0,1,Emil,M,1,1,110413,79.65,E67,S,Taussig,Mr,adult
+264,0,1,William,M,0,0,112059,0,B94,S,Harrison,Mr,adult
+265,0,3,Delia,F,0,0,382649,7.75,NA,Q,Henry,Miss,adult
+266,0,2,David,M,0,0,C.A. 17248,10.5,NA,S,Reeves,Mr,adult
+267,0,3,Ernesti Arvid,M,4,1,3101295,39.6875,NA,S,Panula,Mr,adult
+268,1,3,Ernst Ulrik,M,1,0,347083,7.775,NA,S,Persson,Mr,adult
+269,1,1,William Thompson (Edith Junkins),F,0,1,PC 17582,153.4625,C125,S,Graham,Mrs,adult
+270,1,1,Amelia,F,0,0,PC 17760,135.6333,C99,S,Bissette,Miss,adult
+271,0,1,Alexander,M,0,0,113798,31,NA,S,Cairns,Mr,adult
+272,1,3,William Henry,M,0,0,LINE,0,NA,S,Tornquist,Mr,adult
+273,1,2,(Elizabeth Anne Maidment),F,0,1,250644,19.5,NA,S,Mellinger,Mrs,adult
+274,0,1,Charles H,M,0,1,PC 17596,29.7,C118,C,Natsch,Mr,adult
+275,1,3,"Hanora ""Nora""",F,0,0,370375,7.75,NA,Q,Healy,Miss,adult
+276,1,1,Kornelia Theodosia,F,1,0,13502,77.9583,D7,S,Andrews,Miss,adult
+277,0,3,Augusta Charlotta,F,0,0,347073,7.75,NA,S,Lindblom,Miss,adult
+278,0,2,"Francis ""Frank""",M,0,0,239853,0,NA,S,Parkes,Mr,adult
+279,0,3,Eric,M,4,1,382652,29.125,NA,Q,Rice,Master,child
+280,1,3,Stanton (Rosa Hunt),F,1,1,C.A. 2673,20.25,NA,S,Abbott,Mrs,adult
+281,0,3,Frank,M,0,0,336439,7.75,NA,Q,Duane,Mr,adult
+282,0,3,Nils Johan Goransson,M,0,0,347464,7.8542,NA,S,Olsson,Mr,adult
+283,0,3,Alfons,M,0,0,345778,9.5,NA,S,de Pelsmaeker,Mr,adult
+284,1,3,Edward Arthur,M,0,0,A/5. 10482,8.05,NA,S,Dorking,Mr,adult
+285,0,1,Richard William,M,0,0,113056,26,A19,S,Smith,Mr,adult
+286,0,3,Ivan,M,0,0,349239,8.6625,NA,C,Stankovic,Mr,adult
+287,1,3,Theodore,M,0,0,345774,9.5,NA,S,de Mulder,Mr,adult
+288,0,3,Penko,M,0,0,349206,7.8958,NA,S,Naidenoff,Mr,adult
+289,1,2,Masabumi,M,0,0,237798,13,NA,S,Hosono,Mr,adult
+290,1,3,Kate,F,0,0,370373,7.75,NA,Q,Connolly,Miss,adult
+291,1,1,"Ellen ""Nellie""",F,0,0,19877,78.85,NA,S,Barber,Miss,adult
+292,1,1,Dickinson H (Helen Walton),F,1,0,11967,91.0792,B49,C,Bishop,Mrs,adult
+293,0,2,Rene Jacques,M,0,0,SC/Paris 2163,12.875,D,C,Levy,Mr,adult
+294,0,3,Aloisia,F,0,0,349236,8.85,NA,S,Haas,Miss,adult
+295,0,3,Ivan,M,0,0,349233,7.8958,NA,S,Mineff,Mr,adult
+296,0,1,Ervin G,M,0,0,PC 17612,27.7208,NA,C,Lewy,Mr,adult
+297,0,3,Mansour,M,0,0,2693,7.2292,NA,C,Hanna,Mr,adult
+298,0,1,Helen Loraine,F,1,2,113781,151.55,C22 C26,S,Allison,Miss,child
+299,1,1,Adolphe,M,0,0,19988,30.5,C106,S,Saalfeld,Mr,adult
+300,1,1,James (Helene DeLaudeniere Chaput),F,0,1,PC 17558,247.5208,B58 B60,C,Baxter,Mrs,adult
+301,1,3,"Anna Katherine ""Annie Kate""",F,0,0,9234,7.75,NA,Q,Kelly,Miss,adult
+302,1,3,Bernard,M,2,0,367226,23.25,NA,Q,McCoy,Mr,adult
+303,0,3,William Cahoone Jr,M,0,0,LINE,0,NA,S,Johnson,Mr,adult
+304,1,2,Nora A,F,0,0,226593,12.35,E101,Q,Keane,Miss,adult
+305,0,3,"Howard Hugh ""Harry""",M,0,0,A/5 2466,8.05,NA,S,Williams,Mr,adult
+306,1,1,Hudson Trevor,M,1,2,113781,151.55,C22 C26,S,Allison,Master,child
+307,1,1,Margaret,F,0,0,17421,110.8833,NA,C,Fleming,Miss,adult
+308,1,1,Victor de Satode (Maria Josefa Perez de Soto y Vallejo),F,1,0,PC 17758,108.9,C65,C,Penasco y Castellana,Mrs,adult
+309,0,2,Samuel,M,1,0,P/PP 3381,24,NA,C,Abelson,Mr,adult
+310,1,1,Laura Mabel,F,0,0,PC 17485,56.9292,E36,C,Francatelli,Miss,adult
+311,1,1,Margaret Bechstein,F,0,0,11767,83.1583,C54,C,Hays,Miss,adult
+312,1,1,Emily Borie,F,2,2,PC 17608,262.375,B57 B59 B63 B66,C,Ryerson,Miss,adult
+313,0,2,William (Anna Sylfven),F,1,1,250651,26,NA,S,Lahtinen,Mrs,adult
+314,0,3,Ignjac,M,0,0,349243,7.8958,NA,S,Hendekovic,Mr,adult
+315,0,2,Benjamin,M,1,1,F.C.C. 13529,26.25,NA,S,Hart,Mr,adult
+316,1,3,Helmina Josefina,F,0,0,347470,7.8542,NA,S,Nilsson,Miss,adult
+317,1,2,Sinai (Miriam Sternin),F,1,0,244367,26,NA,S,Kantor,Mrs,adult
+318,0,2,Ernest,M,0,0,29011,14,NA,S,Moraweck,Dr,adult
+319,1,1,Mary Natalie,F,0,2,36928,164.8667,C7,S,Wick,Miss,adult
+320,1,1,Frederic Oakley (Margaretta Corning Stone),F,1,1,16966,134.5,E34,C,Spedden,Mrs,adult
+321,0,3,Samuel,M,0,0,A/5 21172,7.25,NA,S,Dennis,Mr,adult
+322,0,3,Yoto,M,0,0,349219,7.8958,NA,S,Danoff,Mr,adult
+323,1,2,Hilda Mary,F,0,0,234818,12.35,NA,Q,Slayter,Miss,adult
+324,1,2,Albert Francis (Sylvia Mae Harbaugh),F,1,1,248738,29,NA,S,Caldwell,Mrs,adult
+325,0,3,George John Jr,M,8,2,CA. 2343,69.55,NA,S,Sage,Mr,adult
+326,1,1,Marie Grice,F,0,0,PC 17760,135.6333,C32,C,Young,Miss,adult
+327,0,3,Johan Hansen,M,0,0,345364,6.2375,NA,S,Nysveen,Mr,adult
+328,1,2,(Ada E Hall),F,0,0,28551,13,D,S,Ball,Mrs,adult
+329,1,3,Frank John (Emily Alice Brown),F,1,1,363291,20.525,NA,S,Goldsmith,Mrs,adult
+330,1,1,Jean Gertrude,F,0,1,111361,57.9792,B18,C,Hippach,Miss,adult
+331,1,3,Agnes,F,2,0,367226,23.25,NA,Q,McCoy,Miss,adult
+332,0,1,Austen,M,0,0,113043,28.5,C124,S,Partner,Mr,adult
+333,0,1,George Edward,M,0,1,PC 17582,153.4625,C91,S,Graham,Mr,adult
+334,0,3,Leo Edmondus,M,2,0,345764,18,NA,S,Vander Planke,Mr,adult
+335,1,1,Henry William (Clara Heinsheimer),F,1,0,PC 17611,133.65,NA,S,Frauenthal,Mrs,adult
+336,0,3,Mitto,M,0,0,349225,7.8958,NA,S,Denkoff,Mr,adult
+337,0,1,Thomas Clinton,M,1,0,113776,66.6,C2,S,Pears,Mr,adult
+338,1,1,Elizabeth Margaret,F,0,0,16966,134.5,E40,C,Burns,Miss,adult
+339,1,3,Karl Edwart,M,0,0,7598,8.05,NA,S,Dahl,Mr,adult
+340,0,1,Stephen Weart,M,0,0,113784,35.5,T,S,Blackwell,Mr,adult
+341,1,2,Edmond Roger,M,1,1,230080,26,F2,S,Navratil,Master,child
+342,1,1,Alice Elizabeth,F,3,2,19950,263,C23 C25 C27,S,Fortune,Miss,adult
+343,0,2,Erik Gustaf,M,0,0,248740,13,NA,S,Collander,Mr,adult
+344,0,2,Charles Frederick Waddington,M,0,0,244361,13,NA,S,Sedgwick,Mr,adult
+345,0,2,Stanley Hubert,M,0,0,229236,13,NA,S,Fox,Mr,adult
+346,1,2,"Amelia ""Mildred""",F,0,0,248733,13,F33,S,Brown,Miss,adult
+347,1,2,Marion Elsie,F,0,0,31418,13,NA,S,Smith,Miss,adult
+348,1,3,Thomas Henry (Mary E Finck),F,1,0,386525,16.1,NA,S,Davison,Mrs,adult
+349,1,3,"William Loch ""William""",M,1,1,C.A. 37671,15.9,NA,S,Coutts,Master,child
+350,0,3,Jovan,M,0,0,315088,8.6625,NA,S,Dimic,Mr,adult
+351,0,3,Nils Martin,M,0,0,7267,9.225,NA,S,Odahl,Mr,adult
+352,0,1,Fletcher Fellows,M,0,0,113510,35,C128,S,Williams-Lambert,Mr,adult
+353,0,3,Tannous,M,1,1,2695,7.2292,NA,C,Elias,Mr,adult
+354,0,3,Josef,M,1,0,349237,17.8,NA,S,Arnold-Franchi,Mr,adult
+355,0,3,Wazli,M,0,0,2647,7.225,NA,C,Yousif,Mr,adult
+356,0,3,Leo Peter,M,0,0,345783,9.5,NA,S,Vanden Steen,Mr,adult
+357,1,1,Elsie Edith,F,0,1,113505,55,E33,S,Bowerman,Miss,adult
+358,0,2,Annie Clemmer,F,0,0,237671,13,NA,S,Funk,Miss,adult
+359,1,3,Mary,F,0,0,330931,7.8792,NA,Q,McGovern,Miss,adult
+360,1,3,"Helen Mary ""Ellie""",F,0,0,330980,7.8792,NA,Q,Mockler,Miss,adult
+361,0,3,Wilhelm,M,1,4,347088,27.9,NA,S,Skoog,Mr,adult
+362,0,2,Sebastiano,M,1,0,SC/PARIS 2167,27.7208,NA,C,del Carlo,Mr,adult
+363,0,3,(Catherine David),F,0,1,2691,14.4542,NA,C,Barbara,Mrs,adult
+364,0,3,Adola,M,0,0,SOTON/O.Q. 3101310,7.05,NA,S,Asim,Mr,adult
+365,0,3,Thomas,M,1,0,370365,15.5,NA,Q,O'Brien,Mr,adult
+366,0,3,Mauritz Nils Martin,M,0,0,C 7076,7.25,NA,S,Adahl,Mr,adult
+367,1,1,Frank Manley (Anna Sophia Atkinson),F,1,0,110813,75.25,D37,C,Warren,Mrs,adult
+368,1,3,(Mantoura Boulos),F,0,0,2626,7.2292,NA,C,Moussa,Mrs,adult
+369,1,3,Annie,F,0,0,14313,7.75,NA,Q,Jermyn,Miss,adult
+370,1,1,Leontine Pauline,F,0,0,PC 17477,69.3,B35,C,Aubart,Mme,adult
+371,1,1,George Achilles,M,1,0,11765,55.4417,E50,C,Harder,Mr,adult
+372,0,3,Jakob Alfred,M,1,0,3101267,6.4958,NA,S,Wiklund,Mr,adult
+373,0,3,William Thomas,M,0,0,323951,8.05,NA,S,Beavan,Mr,adult
+374,0,1,Sante,M,0,0,PC 17760,135.6333,NA,C,Ringhini,Mr,adult
+375,0,3,Stina Viola,F,3,1,349909,21.075,NA,S,Palsson,Miss,child
+376,1,1,Edgar Joseph (Leila Saks),F,1,0,PC 17604,82.1708,NA,C,Meyer,Mrs,adult
+377,1,3,Aurora Adelia,F,0,0,C 7077,7.25,NA,S,Landergren,Miss,adult
+378,0,1,Harry Elkins,M,0,2,113503,211.5,C82,C,Widener,Mr,adult
+379,0,3,Tannous,M,0,0,2648,4.0125,NA,C,Betros,Mr,adult
+380,0,3,Karl Gideon,M,0,0,347069,7.775,NA,S,Gustafsson,Mr,adult
+381,1,1,Rosalie,F,0,0,PC 17757,227.525,NA,C,Bidois,Miss,adult
+382,1,3,"Maria (""Mary"")",F,0,2,2653,15.7417,NA,C,Nakid,Miss,child
+383,0,3,Juho,M,0,0,STON/O 2. 3101293,7.925,NA,S,Tikkanen,Mr,adult
+384,1,1,Alexander Oskar (Mary Aline Towner),F,1,0,113789,52,NA,S,Holverson,Mrs,adult
+385,0,3,Vasil,M,0,0,349227,7.8958,NA,S,Plotcharsky,Mr,adult
+386,0,2,Charles Henry,M,0,0,S.O.C. 14879,73.5,NA,S,Davies,Mr,adult
+387,0,3,Sidney Leonard,M,5,2,CA 2144,46.9,NA,S,Goodwin,Master,child
+388,1,2,Kate,F,0,0,27849,13,NA,S,Buss,Miss,adult
+389,0,3,Matthew,M,0,0,367655,7.7292,NA,Q,Sadlier,Mr,adult
+390,1,2,Bertha,F,0,0,SC 1748,12,NA,C,Lehmann,Miss,adult
+391,1,1,William Ernest,M,1,2,113760,120,B96 B98,S,Carter,Mr,adult
+392,1,3,Carl Olof,M,0,0,350034,7.7958,NA,S,Jansson,Mr,adult
+393,0,3,Johan Birger,M,2,0,3101277,7.925,NA,S,Gustafsson,Mr,adult
+394,1,1,Marjorie,F,1,0,35273,113.275,D36,C,Newell,Miss,adult
+395,1,3,Hjalmar (Agnes Charlotta Bengtsson),F,0,2,PP 9549,16.7,G6,S,Sandstrom,Mrs,adult
+396,0,3,Erik,M,0,0,350052,7.7958,NA,S,Johansson,Mr,adult
+397,0,3,Elina,F,0,0,350407,7.8542,NA,S,Olsson,Miss,adult
+398,0,2,Peter David,M,0,0,28403,26,NA,S,McKane,Mr,adult
+399,0,2,Alfred,M,0,0,244278,10.5,NA,S,Pain,Dr,adult
+400,1,2,William H (Jessie L),F,0,0,240929,12.65,NA,S,Trout,Mrs,adult
+401,1,3,Juha,M,0,0,STON/O 2. 3101289,7.925,NA,S,Niskanen,Mr,adult
+402,0,3,John,M,0,0,341826,8.05,NA,S,Adams,Mr,adult
+403,0,3,Mari Aina,F,1,0,4137,9.825,NA,S,Jussila,Miss,adult
+404,0,3,Pekka Pietari,M,1,0,STON/O2. 3101279,15.85,NA,S,Hakkarainen,Mr,adult
+405,0,3,Marija,F,0,0,315096,8.6625,NA,S,Oreskovic,Miss,adult
+406,0,2,Shadrach,M,1,0,28664,21,NA,S,Gale,Mr,adult
+407,0,3,Carl/Charles Peter,M,0,0,347064,7.75,NA,S,Widegren,Mr,adult
+408,1,2,William Rowe,M,1,1,29106,18.75,NA,S,Richards,Master,child
+409,0,3,Hans Martin Monsen,M,0,0,312992,7.775,NA,S,Birkeland,Mr,adult
+410,0,3,Ida,F,3,1,4133,25.4667,NA,S,Lefebre,Miss,child
+411,0,3,Todor,M,0,0,349222,7.8958,NA,S,Sdycoff,Mr,adult
+412,0,3,Henry,M,0,0,394140,6.8583,NA,Q,Hart,Mr,adult
+413,1,1,Daisy E,F,1,0,19928,90,C78,Q,Minahan,Miss,adult
+414,0,2,Alfred Fleming,M,0,0,239853,0,NA,S,Cunningham,Mr,adult
+415,1,3,Johan Julian,M,0,0,STON/O 2. 3101269,7.925,NA,S,Sundman,Mr,adult
+416,0,3,Thomas (Annie Louise Rowley),F,0,0,343095,8.05,NA,S,Meek,Mrs,adult
+417,1,2,James Vivian (Lulu Thorne Christian),F,1,1,28220,32.5,NA,S,Drew,Mrs,adult
+418,1,2,Lyyli Karoliina,F,0,2,250652,13,NA,S,Silven,Miss,adult
+419,0,2,William John,M,0,0,28228,13,NA,S,Matthews,Mr,adult
+420,0,3,Catharina,F,0,2,345773,24.15,NA,S,Van Impe,Miss,child
+421,0,3,Stanio,M,0,0,349254,7.8958,NA,C,Gheorgheff,Mr,adult
+422,0,3,David,M,0,0,A/5. 13032,7.7333,NA,Q,Charters,Mr,adult
+423,0,3,Leo,M,0,0,315082,7.875,NA,S,Zimmerman,Mr,adult
+424,0,3,Ernst Gilbert (Anna Sigrid Maria Brogren),F,1,1,347080,14.4,NA,S,Danbom,Mrs,adult
+425,0,3,Viktor Richard,M,1,1,370129,20.2125,NA,S,Rosblom,Mr,adult
+426,0,3,Phillippe,M,0,0,A/4. 34244,7.25,NA,S,Wiseman,Mr,adult
+427,1,2,Charles V (Ada Maria Winfield),F,1,0,2003,26,NA,S,Clarke,Mrs,adult
+428,1,2,"Kate Florence (""Mrs Kate Louise Phillips Marshall"")",F,0,0,250655,26,NA,S,Phillips,Miss,adult
+429,0,3,James,M,0,0,364851,7.75,NA,Q,Flynn,Mr,adult
+430,1,3,Berk (Berk Trembisky),M,0,0,SOTON/O.Q. 392078,8.05,E10,S,Pickard,Mr,adult
+431,1,1,Mauritz Hakan,M,0,0,110564,26.55,C52,S,Bjornstrom-Steffansson,Mr,adult
+432,1,3,Percival (Florence Kate White),F,1,0,376564,16.1,NA,S,Thorneycroft,Mrs,adult
+433,1,2,Charles Alexander (Alice Adelaide Slow),F,1,0,SC/AH 3085,26,NA,S,Louch,Mrs,adult
+434,0,3,Nikolai Erland,M,0,0,STON/O 2. 3101274,7.125,NA,S,Kallio,Mr,adult
+435,0,1,William Baird,M,1,0,13507,55.9,E44,S,Silvey,Mr,adult
+436,1,1,Lucile Polk,F,1,2,113760,120,B96 B98,S,Carter,Miss,adult
+437,0,3,"Doolina Margaret ""Daisy""",F,2,2,W./C. 6608,34.375,NA,S,Ford,Miss,adult
+438,1,2,Sidney (Emily Hocking),F,2,3,29106,18.75,NA,S,Richards,Mrs,adult
+439,0,1,Mark,M,1,4,19950,263,C23 C25 C27,S,Fortune,Mr,adult
+440,0,2,Johan Henrik Johannesson,M,0,0,C.A. 18723,10.5,NA,S,Kvillner,Mr,adult
+441,1,2,Benjamin (Esther Ada Bloomfield),F,1,1,F.C.C. 13529,26.25,NA,S,Hart,Mrs,adult
+442,0,3,Leon,M,0,0,345769,9.5,NA,S,Hampe,Mr,adult
+443,0,3,Johan Emil,M,1,0,347076,7.775,NA,S,Petterson,Mr,adult
+444,1,2,Encarnacion,F,0,0,230434,13,NA,S,Reynaldo,Ms,adult
+445,1,3,Bernt,M,0,0,65306,8.1125,NA,S,Johannesen-Bratthammer,Mr,adult
+446,1,1,Washington,M,0,2,33638,81.8583,A34,S,Dodge,Master,child
+447,1,2,Madeleine Violet,F,0,1,250644,19.5,NA,S,Mellinger,Miss,child
+448,1,1,Frederic Kimber,M,0,0,113794,26.55,NA,S,Seward,Mr,adult
+449,1,3,Marie Catherine,F,2,1,2666,19.2583,NA,C,Baclini,Miss,child
+450,1,1,Arthur Godfrey,M,0,0,113786,30.5,C104,S,Peuchen,Major,adult
+451,0,2,Edwy Arthur,M,1,2,C.A. 34651,27.75,NA,S,West,Mr,adult
+452,0,3,Ingvald Olai Olsen,M,1,0,65303,19.9667,NA,S,Hagland,Mr,adult
+453,0,1,Benjamin Laventall,M,0,0,113051,27.75,C111,C,Foreman,Mr,adult
+454,1,1,Samuel L,M,1,0,17453,89.1042,C92,C,Goldenberg,Mr,adult
+455,0,3,Joseph,M,0,0,A/5 2817,8.05,NA,S,Peduzzi,Mr,adult
+456,1,3,Ivan,M,0,0,349240,7.8958,NA,C,Jalsevac,Mr,adult
+457,0,1,Francis Davis,M,0,0,13509,26.55,E38,S,Millet,Mr,adult
+458,1,1,Frederick R (Marion),F,1,0,17464,51.8625,D21,S,Kenyon,Mrs,adult
+459,1,2,Ellen,F,0,0,F.C.C. 13531,10.5,NA,S,Toomey,Miss,adult
+460,0,3,Maurice,M,0,0,371060,7.75,NA,Q,O'Connor,Mr,adult
+461,1,1,Harry,M,0,0,19952,26.55,E12,S,Anderson,Mr,adult
+462,0,3,William,M,0,0,364506,8.05,NA,S,Morley,Mr,adult
+463,0,1,Arthur H,M,0,0,111320,38.5,E63,S,Gee,Mr,adult
+464,0,2,Jacob Christian,M,0,0,234360,13,NA,S,Milling,Mr,adult
+465,0,3,Simon,M,0,0,A/S 2816,8.05,NA,S,Maisner,Mr,adult
+466,0,3,Manuel Estanslas,M,0,0,SOTON/O.Q. 3101306,7.05,NA,S,Goncalves,Mr,adult
+467,0,2,William,M,0,0,239853,0,NA,S,Campbell,Mr,adult
+468,0,1,John Montgomery,M,0,0,113792,26.55,NA,S,Smart,Mr,adult
+469,0,3,James,M,0,0,36209,7.725,NA,Q,Scanlan,Mr,adult
+470,1,3,Helene Barbara,F,2,1,2666,19.2583,NA,C,Baclini,Miss,child
+471,0,3,Arthur,M,0,0,323592,7.25,NA,S,Keefe,Mr,adult
+472,0,3,Luka,M,0,0,315089,8.6625,NA,S,Cacic,Mr,adult
+473,1,2,Edwy Arthur (Ada Mary Worth),F,1,2,C.A. 34651,27.75,NA,S,West,Mrs,adult
+474,1,2,Amin S (Marie Marthe Thuillard),F,0,0,SC/AH Basle 541,13.7917,D,C,Jerwan,Mrs,adult
+475,0,3,Ida Sofia,F,0,0,7553,9.8375,NA,S,Strandberg,Miss,adult
+476,0,1,George Quincy,M,0,0,110465,52,A14,S,Clifford,Mr,adult
+477,0,2,Peter Henry,M,1,0,31027,21,NA,S,Renouf,Mr,adult
+478,0,3,Lewis Richard,M,1,0,3460,7.0458,NA,S,Braund,Mr,adult
+479,0,3,Nils August,M,0,0,350060,7.5208,NA,S,Karlsson,Mr,adult
+480,1,3,Hildur E,F,0,1,3101298,12.2875,NA,S,Hirvonen,Miss,child
+481,0,3,Harold Victor,M,5,2,CA 2144,46.9,NA,S,Goodwin,Master,child
+482,0,2,"Anthony Wood ""Archie""",M,0,0,239854,0,NA,S,Frost,Mr,adult
+483,0,3,Richard Henry,M,0,0,A/5 3594,8.05,NA,S,Rouse,Mr,adult
+484,1,3,(Hedwig),F,0,0,4134,9.5875,NA,S,Turkula,Mrs,adult
+485,1,1,Dickinson H,M,1,0,11967,91.0792,B49,C,Bishop,Mr,adult
+486,0,3,Jeannie,F,3,1,4133,25.4667,NA,S,Lefebre,Miss,child
+487,1,1,Frederick Maxfield (Jane Anne Forby),F,1,0,19943,90,C93,S,Hoyt,Mrs,adult
+488,0,1,Edward Austin,M,0,0,11771,29.7,B37,C,Kent,Mr,adult
+489,0,3,Francis William,M,0,0,A.5. 18509,8.05,NA,S,Somerton,Mr,adult
+490,1,3,"Eden Leslie ""Neville""",M,1,1,C.A. 37671,15.9,NA,S,Coutts,Master,child
+491,0,3,Konrad Mathias Reiersen,M,1,0,65304,19.9667,NA,S,Hagland,Mr,adult
+492,0,3,Einar,M,0,0,SOTON/OQ 3101317,7.25,NA,S,Windelov,Mr,adult
+493,0,1,Harry Markland,M,0,0,113787,30.5,C30,S,Molson,Mr,adult
+494,0,1,Ramon,M,0,0,PC 17609,49.5042,NA,C,Artagaveytia,Mr,adult
+495,0,3,Edward Roland,M,0,0,A/4 45380,8.05,NA,S,Stanley,Mr,adult
+496,0,3,Gerious,M,0,0,2627,14.4583,NA,C,Yousseff,Mr,adult
+497,1,1,Elizabeth Mussey,F,1,0,36947,78.2667,D20,C,Eustis,Miss,adult
+498,0,3,Frederick William,M,0,0,C.A. 6212,15.1,NA,S,Shellard,Mr,adult
+499,0,1,Hudson J C (Bessie Waldo Daniels),F,1,2,113781,151.55,C22 C26,S,Allison,Mrs,adult
+500,0,3,Olof,M,0,0,350035,7.7958,NA,S,Svensson,Mr,adult
+501,0,3,Petar,M,0,0,315086,8.6625,NA,S,Calic,Mr,adult
+502,0,3,Mary,F,0,0,364846,7.75,NA,Q,Canavan,Miss,adult
+503,0,3,Bridget Mary,F,0,0,330909,7.6292,NA,Q,O'Sullivan,Miss,adult
+504,0,3,Kristina Sofia,F,0,0,4135,9.5875,NA,S,Laitinen,Miss,adult
+505,1,1,Roberta,F,0,0,110152,86.5,B79,S,Maioni,Miss,adult
+506,0,1,Victor de Satode,M,1,0,PC 17758,108.9,C65,C,Penasco y Castellana,Mr,adult
+507,1,2,Frederick Charles (Jane Richards),F,0,2,26360,26,NA,S,Quick,Mrs,adult
+508,1,1,"George (""George Arthur Brayton"")",M,0,0,111427,26.55,NA,S,Bradley,Mr,adult
+509,0,3,Henry Margido,M,0,0,C 4001,22.525,NA,S,Olsen,Mr,adult
+510,1,3,Fang,M,0,0,1601,56.4958,NA,S,Lang,Mr,adult
+511,1,3,Eugene Patrick,M,0,0,382651,7.75,NA,Q,Daly,Mr,adult
+512,0,3,James,M,0,0,SOTON/OQ 3101316,8.05,NA,S,Webber,Mr,adult
+513,1,1,James Robert,M,0,0,PC 17473,26.2875,E25,S,McGough,Mr,adult
+514,1,1,Martin (Elizabeth L,F,1,0,PC 17603,59.4,NA,C,Rothschild,Mrs,adult
+515,0,3,Satio,M,0,0,349209,7.4958,NA,S,Coleff,Mr,adult
+516,0,1,William Anderson,M,0,0,36967,34.0208,D46,S,Walker,Mr,adult
+517,1,2,(Amelia Milley),F,0,0,C.A. 34260,10.5,F33,S,Lemore,Mrs,adult
+518,0,3,Patrick,M,0,0,371110,24.15,NA,Q,Ryan,Mr,adult
+519,1,2,"William A (Florence ""Mary"" Agnes Hughes)",F,1,0,226875,26,NA,S,Angle,Mrs,adult
+520,0,3,Stefo,M,0,0,349242,7.8958,NA,S,Pavlovic,Mr,adult
+521,1,1,Anne,F,0,0,12749,93.5,B73,S,Perreault,Miss,adult
+522,0,3,Janko,M,0,0,349252,7.8958,NA,S,Vovk,Mr,adult
+523,0,3,Sarkis,M,0,0,2624,7.225,NA,C,Lahoud,Mr,adult
+524,1,1,Louis Albert (Ida Sophia Fischer),F,0,1,111361,57.9792,B18,C,Hippach,Mrs,adult
+525,0,3,Fared,M,0,0,2700,7.2292,NA,C,Kassem,Mr,adult
+526,0,3,James,M,0,0,367232,7.75,NA,Q,Farrell,Mr,adult
+527,1,2,Lucy,F,0,0,W./C. 14258,10.5,NA,S,Ridsdale,Miss,adult
+528,0,1,John,M,0,0,PC 17483,221.7792,C95,S,Farthing,Mr,adult
+529,0,3,Johan Werner,M,0,0,3101296,7.925,NA,S,Salonen,Mr,adult
+530,0,2,Richard George,M,2,1,29104,11.5,NA,S,Hocking,Mr,adult
+531,1,2,Phyllis May,F,1,1,26360,26,NA,S,Quick,Miss,child
+532,0,3,Nakli,M,0,0,2641,7.2292,NA,C,Toufik,Mr,adult
+533,0,3,Joseph Jr,M,1,1,2690,7.2292,NA,C,Elias,Mr,adult
+534,1,3,Catherine (Catherine Rizk),F,0,2,2668,22.3583,NA,C,Peter,Mrs,adult
+535,0,3,Marija,F,0,0,315084,8.6625,NA,S,Cacic,Miss,adult
+536,1,2,Eva Miriam,F,0,2,F.C.C. 13529,26.25,NA,S,Hart,Miss,child
+537,0,1,Archibald Willingham,M,0,0,113050,26.55,B38,S,Butt,Major,adult
+538,1,1,Bertha,F,0,0,PC 17761,106.425,NA,C,LeRoy,Miss,adult
+539,0,3,Samuel Beard,M,0,0,364498,14.5,NA,S,Risien,Mr,adult
+540,1,1,Hedwig Margaritha,F,0,2,13568,49.5,B39,C,Frolicher,Miss,adult
+541,1,1,Harriet R,F,0,2,WE/P 5735,71,B22,S,Crosby,Miss,adult
+542,0,3,Ingeborg Constanzia,F,4,2,347082,31.275,NA,S,Andersson,Miss,child
+543,0,3,Sigrid Elisabeth,F,4,2,347082,31.275,NA,S,Andersson,Miss,child
+544,1,2,Edward,M,1,0,2908,26,NA,S,Beane,Mr,adult
+545,0,1,Walter Donald,M,1,0,PC 17761,106.425,C86,C,Douglas,Mr,adult
+546,0,1,Arthur Ernest,M,0,0,693,26,NA,S,Nicholson,Mr,adult
+547,1,2,Edward (Ethel Clarke),F,1,0,2908,26,NA,S,Beane,Mrs,adult
+548,1,2,Julian,M,0,0,SC/PARIS 2146,13.8625,NA,C,Padro y Manent,Mr,adult
+549,0,3,Frank John,M,1,1,363291,20.525,NA,S,Goldsmith,Mr,adult
+550,1,2,John Morgan Jr,M,1,1,C.A. 33112,36.75,NA,S,Davies,Master,child
+551,1,1,John Borland Jr,M,0,2,17421,110.8833,C70,C,Thayer,Mr,adult
+552,0,2,Percival James R,M,0,0,244358,26,NA,S,Sharp,Mr,adult
+553,0,3,Timothy,M,0,0,330979,7.8292,NA,Q,O'Brien,Mr,adult
+554,1,3,"Fahim (""Philip Zenni"")",M,0,0,2620,7.225,NA,C,Leeni,Mr,adult
+555,1,3,Velin,F,0,0,347085,7.775,NA,S,Ohman,Miss,adult
+556,0,1,George,M,0,0,113807,26.55,NA,S,Wright,Mr,adult
+557,1,1,"(Lucille Christiana Sutherland) (""Mrs Morgan"")",F,1,0,11755,39.6,A16,C,Duff Gordon,Lady,adult
+558,0,1,Victor,M,0,0,PC 17757,227.525,NA,C,Robbins,Mr,adult
+559,1,1,Emil (Tillie Mandelbaum),F,1,1,110413,79.65,E67,S,Taussig,Mrs,adult
+560,1,3,Guillaume Joseph (Emma),F,1,0,345572,17.4,NA,S,de Messemaeker,Mrs,adult
+561,0,3,Thomas Rowan,M,0,0,372622,7.75,NA,Q,Morrow,Mr,adult
+562,0,3,Husein,M,0,0,349251,7.8958,NA,S,Sivic,Mr,adult
+563,0,2,Robert Douglas,M,0,0,218629,13.5,NA,S,Norman,Mr,adult
+564,0,3,John,M,0,0,SOTON/OQ 392082,8.05,NA,S,Simmons,Mr,adult
+565,0,3,(Marion Ogden),F,0,0,SOTON/O.Q. 392087,8.05,NA,S,Meanwell,Miss,adult
+566,0,3,Alfred J,M,2,0,A/4 48871,24.15,NA,S,Davies,Mr,adult
+567,0,3,Ilia,M,0,0,349205,7.8958,NA,S,Stoytcheff,Mr,adult
+568,0,3,Nils (Alma Cornelia Berglund),F,0,4,349909,21.075,NA,S,Palsson,Mrs,adult
+569,0,3,Tannous,M,0,0,2686,7.2292,NA,C,Doharr,Mr,adult
+570,1,3,Carl,M,0,0,350417,7.8542,NA,S,Jonsson,Mr,adult
+571,1,2,George,M,0,0,S.W./PP 752,10.5,NA,S,Harris,Mr,adult
+572,1,1,Edward Dale (Charlotte Lamson),F,2,0,11769,51.4792,C101,S,Appleton,Mrs,adult
+573,1,1,"John Irwin (""Irving"")",M,0,0,PC 17474,26.3875,E25,S,Flynn,Mr,adult
+574,1,3,Mary,F,0,0,14312,7.75,NA,Q,Kelly,Miss,adult
+575,0,3,Alfred George John,M,0,0,A/4. 20589,8.05,NA,S,Rush,Mr,adult
+576,0,3,George,M,0,0,358585,14.5,NA,S,Patchett,Mr,adult
+577,1,2,Ethel,F,0,0,243880,13,NA,S,Garside,Miss,adult
+578,1,1,William Baird (Alice Munger),F,1,0,13507,55.9,E44,S,Silvey,Mrs,adult
+579,0,3,Joseph (Maria Elias),F,1,0,2689,14.4583,NA,C,Caram,Mrs,adult
+580,1,3,Eiriik,M,0,0,STON/O 2. 3101286,7.925,NA,S,Jussila,Mr,adult
+581,1,2,Julie Rachel,F,1,1,237789,30,NA,S,Christy,Miss,adult
+582,1,1,John Borland (Marian Longstreth Morris),F,1,1,17421,110.8833,C68,C,Thayer,Mrs,adult
+583,0,2,William James,M,0,0,28403,26,NA,S,Downton,Mr,adult
+584,0,1,John Hugo,M,0,0,13049,40.125,A10,C,Ross,Mr,adult
+585,0,3,Uscher,M,0,0,3411,8.7125,NA,C,Paulner,Mr,adult
+586,1,1,Ruth,F,0,2,110413,79.65,E68,S,Taussig,Miss,adult
+587,0,2,John Denzil,M,0,0,237565,15,NA,S,Jarvis,Mr,adult
+588,1,1,Maxmillian,M,1,1,13567,79.2,B41,C,Frolicher-Stehli,Mr,adult
+589,0,3,Eliezer,M,0,0,14973,8.05,NA,S,Gilinski,Mr,adult
+590,0,3,Joseph,M,0,0,A./5. 3235,8.05,NA,S,Murdlin,Mr,adult
+591,0,3,Matti,M,0,0,STON/O 2. 3101273,7.125,NA,S,Rintamaki,Mr,adult
+592,1,1,Walter Bertram (Martha Eustis),F,1,0,36947,78.2667,D20,C,Stephenson,Mrs,adult
+593,0,3,William James,M,0,0,A/5 3902,7.25,NA,S,Elsbury,Mr,adult
+594,0,3,Mary,F,0,2,364848,7.75,NA,Q,Bourke,Miss,adult
+595,0,2,John Henry,M,1,0,SC/AH 29037,26,NA,S,Chapman,Mr,adult
+596,0,3,Jean Baptiste,M,1,1,345773,24.15,NA,S,Van Impe,Mr,adult
+597,1,2,Jessie Wills,F,0,0,248727,33,NA,S,Leitch,Miss,adult
+598,0,3,Alfred,M,0,0,LINE,0,NA,S,Johnson,Mr,adult
+599,0,3,Hanna,M,0,0,2664,7.225,NA,C,Boulos,Mr,adult
+600,1,1,"Cosmo Edmund (""Mr Morgan"")",M,1,0,PC 17485,56.9292,A20,C,Duff Gordon,Sir,adult
+601,1,2,Sidney Samuel (Amy Frances Christy),F,2,1,243847,27,NA,S,Jacobsohn,Mrs,adult
+602,0,3,Petco,M,0,0,349214,7.8958,NA,S,Slabenoff,Mr,adult
+603,0,1,Charles H,M,0,0,113796,42.4,NA,S,Harrington,Mr,adult
+604,0,3,Ernst William,M,0,0,364511,8.05,NA,S,Torber,Mr,adult
+605,1,1,"Harry (""Mr E Haven"")",M,0,0,111426,26.55,NA,C,Homer,Mr,adult
+606,0,3,Edvard Bengtsson,M,1,0,349910,15.55,NA,S,Lindell,Mr,adult
+607,0,3,Milan,M,0,0,349246,7.8958,NA,S,Karaic,Mr,adult
+608,1,1,Robert Williams,M,0,0,113804,30.5,NA,S,Daniel,Mr,adult
+609,1,2,Joseph (Juliette Marie Louise Lafargue),F,1,2,SC/Paris 2123,41.5792,NA,C,Laroche,Mrs,adult
+610,1,1,Elizabeth W,F,0,0,PC 17582,153.4625,C125,S,Shutes,Miss,adult
+611,0,3,Anders Johan (Alfrida Konstantia Brogren),F,1,5,347082,31.275,NA,S,Andersson,Mrs,adult
+612,0,3,Jose Neto,M,0,0,SOTON/O.Q. 3101305,7.05,NA,S,Jardin,Mr,adult
+613,1,3,Margaret Jane,F,1,0,367230,15.5,NA,Q,Murphy,Miss,adult
+614,0,3,John,M,0,0,370377,7.75,NA,Q,Horgan,Mr,adult
+615,0,3,William Alfred,M,0,0,364512,8.05,NA,S,Brocklebank,Mr,adult
+616,1,2,Alice,F,1,2,220845,65,NA,S,Herman,Miss,adult
+617,0,3,Ernst Gilbert,M,1,1,347080,14.4,NA,S,Danbom,Mr,adult
+618,0,3,William Arthur (Cordelia K Stanlick),F,1,0,A/5. 3336,16.1,NA,S,Lobb,Mrs,adult
+619,1,2,Marion Louise,F,2,1,230136,39,F4,S,Becker,Miss,child
+620,0,2,Lawrence,M,0,0,31028,10.5,NA,S,Gavey,Mr,adult
+621,0,3,Antoni,M,1,0,2659,14.4542,NA,C,Yasbeck,Mr,adult
+622,1,1,Edwin Nelson Jr,M,1,0,11753,52.5542,D19,S,Kimball,Mr,adult
+623,1,3,Sahid,M,1,1,2653,15.7417,NA,C,Nakid,Mr,adult
+624,0,3,Henry Damsgaard,M,0,0,350029,7.8542,NA,S,Hansen,Mr,adult
+625,0,3,"David John ""Dai""",M,0,0,54636,16.1,NA,S,Bowen,Mr,adult
+626,0,1,Frederick,M,0,0,36963,32.3208,D50,S,Sutton,Mr,adult
+627,0,2,Charles Leonard,M,0,0,219533,12.35,NA,Q,Kirkland,Rev,adult
+628,1,1,Gretchen Fiske,F,0,0,13502,77.9583,D9,S,Longley,Miss,adult
+629,0,3,Guentcho,M,0,0,349224,7.8958,NA,S,Bostandyeff,Mr,adult
+630,0,3,Patrick D,M,0,0,334912,7.7333,NA,Q,O'Connell,Mr,adult
+631,1,1,Algernon Henry Wilson,M,0,0,27042,30,A23,S,Barkworth,Mr,adult
+632,0,3,Johan Svensson,M,0,0,347743,7.0542,NA,S,Lundahl,Mr,adult
+633,1,1,Max,M,0,0,13214,30.5,B50,C,Stahelin-Maeglin,Dr,adult
+634,0,1,William Henry Marsh,M,0,0,112052,0,NA,S,Parr,Mr,adult
+635,0,3,Mabel,F,3,2,347088,27.9,NA,S,Skoog,Miss,child
+636,1,2,Mary,F,0,0,237668,13,NA,S,Davis,Miss,adult
+637,0,3,Antti Gustaf,M,0,0,STON/O 2. 3101292,7.925,NA,S,Leinonen,Mr,adult
+638,0,2,Harvey,M,1,1,C.A. 31921,26.25,NA,S,Collyer,Mr,adult
+639,0,3,Juha (Maria Emilia Ojala),F,0,5,3101295,39.6875,NA,S,Panula,Mrs,adult
+640,0,3,Percival,M,1,0,376564,16.1,NA,S,Thorneycroft,Mr,adult
+641,0,3,Hans Peder,M,0,0,350050,7.8542,NA,S,Jensen,Mr,adult
+642,1,1,Emma,F,0,0,PC 17477,69.3,B35,C,Sagesser,Mlle,adult
+643,0,3,Margit Elizabeth,F,3,2,347088,27.9,NA,S,Skoog,Miss,child
+644,1,3,Choong,M,0,0,1601,56.4958,NA,S,Foo,Mr,adult
+645,1,3,Eugenie,F,2,1,2666,19.2583,NA,C,Baclini,Miss,child
+646,1,1,Henry Sleeper,M,1,0,PC 17572,76.7292,D33,C,Harper,Mr,adult
+647,0,3,Liudevit,M,0,0,349231,7.8958,NA,S,Cor,Mr,adult
+648,1,1,Oberst Alfons,M,0,0,13213,35.5,A26,C,Simonius-Blumer,Col,adult
+649,0,3,Edward,M,0,0,S.O./P.P. 751,7.55,NA,S,Willey,Mr,adult
+650,1,3,Amy Zillah Elsie,F,0,0,CA. 2314,7.55,NA,S,Stanley,Miss,adult
+651,0,3,Mito,M,0,0,349221,7.8958,NA,S,Mitkoff,Mr,adult
+652,1,2,Elsie,F,0,1,231919,23,NA,S,Doling,Miss,adult
+653,0,3,Johannes Halvorsen,M,0,0,8475,8.4333,NA,S,Kalvik,Mr,adult
+654,1,3,"Hanora ""Norah""",F,0,0,330919,7.8292,NA,Q,O'Leary,Miss,adult
+655,0,3,"Hanora ""Nora""",F,0,0,365226,6.75,NA,Q,Hegarty,Miss,adult
+656,0,2,Leonard Mark,M,2,0,S.O.C. 14879,73.5,NA,S,Hickman,Mr,adult
+657,0,3,Alexander,M,0,0,349223,7.8958,NA,S,Radeff,Mr,adult
+658,0,3,John (Catherine),F,1,1,364849,15.5,NA,Q,Bourke,Mrs,adult
+659,0,2,George Floyd,M,0,0,29751,13,NA,S,Eitemiller,Mr,adult
+660,0,1,Arthur Webster,M,0,2,35273,113.275,D48,C,Newell,Mr,adult
+661,1,1,Henry William,M,2,0,PC 17611,133.65,NA,S,Frauenthal,Dr,adult
+662,0,3,Mohamed,M,0,0,2623,7.225,NA,C,Badt,Mr,adult
+663,0,1,Edward Pomeroy,M,0,0,5727,25.5875,E58,S,Colley,Mr,adult
+664,0,3,Peju,M,0,0,349210,7.4958,NA,S,Coleff,Mr,adult
+665,1,3,Eino William,M,1,0,STON/O 2. 3101285,7.925,NA,S,Lindqvist,Mr,adult
+666,0,2,Lewis,M,2,0,S.O.C. 14879,73.5,NA,S,Hickman,Mr,adult
+667,0,2,Reginald Fenton,M,0,0,234686,13,NA,S,Butler,Mr,adult
+668,0,3,Knud Paust,M,0,0,312993,7.775,NA,S,Rommetvedt,Mr,adult
+669,0,3,Jacob,M,0,0,A/5 3536,8.05,NA,S,Cook,Mr,adult
+670,1,1,Elmer Zebley (Juliet Cummins Wright),F,1,0,19996,52,C126,S,Taylor,Mrs,adult
+671,1,2,Thomas William Solomon (Elizabeth Catherine Ford),F,1,1,29750,39,NA,S,Brown,Mrs,adult
+672,0,1,Thornton,M,1,0,F.C. 12750,52,B71,S,Davidson,Mr,adult
+673,0,2,Henry Michael,M,0,0,C.A. 24580,10.5,NA,S,Mitchell,Mr,adult
+674,1,2,Charles,M,0,0,244270,13,NA,S,Wilhelms,Mr,adult
+675,0,2,Ennis Hastings,M,0,0,239856,0,NA,S,Watson,Mr,adult
+676,0,3,Gustaf Hjalmar,M,0,0,349912,7.775,NA,S,Edvardsson,Mr,adult
+677,0,3,Frederick Charles,M,0,0,342826,8.05,NA,S,Sawyer,Mr,adult
+678,1,3,Anna Sofia,F,0,0,4138,9.8417,NA,S,Turja,Miss,adult
+679,0,3,Frederick (Augusta Tyler),F,1,6,CA 2144,46.9,NA,S,Goodwin,Mrs,adult
+680,1,1,Thomas Drake Martinez,M,0,1,PC 17755,512.3292,B51 B53 B55,C,Cardeza,Mr,adult
+681,0,3,Katie,F,0,0,330935,8.1375,NA,Q,Peters,Miss,adult
+682,1,1,Hammad,M,0,0,PC 17572,76.7292,D49,C,Hassab,Mr,adult
+683,0,3,Thor Anderson,M,0,0,6563,9.225,NA,S,Olsvigen,Mr,adult
+684,0,3,Charles Edward,M,5,2,CA 2144,46.9,NA,S,Goodwin,Mr,adult
+685,0,2,Thomas William Solomon,M,1,1,29750,39,NA,S,Brown,Mr,adult
+686,0,2,Joseph Philippe Lemercier,M,1,2,SC/Paris 2123,41.5792,NA,C,Laroche,Mr,adult
+687,0,3,Jaako Arnold,M,4,1,3101295,39.6875,NA,S,Panula,Mr,adult
+688,0,3,Branko,M,0,0,349228,10.1708,NA,S,Dakic,Mr,adult
+689,0,3,Eberhard Thelander,M,0,0,350036,7.7958,NA,S,Fischer,Mr,adult
+690,1,1,Georgette Alexandra,F,0,1,24160,211.3375,B5,S,Madill,Miss,adult
+691,1,1,Albert Adrian,M,1,0,17474,57,B20,S,Dick,Mr,adult
+692,1,3,Manca,F,0,1,349256,13.4167,NA,C,Karun,Miss,child
+693,1,3,Ali,M,0,0,1601,56.4958,NA,S,Lam,Mr,adult
+694,0,3,Khalil,M,0,0,2672,7.225,NA,C,Saad,Mr,adult
+695,0,1,John,M,0,0,113800,26.55,NA,S,Weir,Col,adult
+696,0,2,Charles Henry,M,0,0,248731,13.5,NA,S,Chapman,Mr,adult
+697,0,3,James,M,0,0,363592,8.05,NA,S,Kelly,Mr,adult
+698,1,3,"Katherine ""Katie""",F,0,0,35852,7.7333,NA,Q,Mullens,Miss,adult
+699,0,1,John Borland,M,1,1,17421,110.8833,C68,C,Thayer,Mr,adult
+700,0,3,Adolf Mathias Nicolai Olsen,M,0,0,348121,7.65,F G63,S,Humblen,Mr,adult
+701,1,1,John Jacob (Madeleine Talmadge Force),F,1,0,PC 17757,227.525,C62 C64,C,Astor,Mrs,adult
+702,1,1,Spencer Victor,M,0,0,PC 17475,26.2875,E24,S,Silverthorne,Mr,adult
+703,0,3,Saiide,F,0,1,2691,14.4542,NA,C,Barbara,Miss,adult
+704,0,3,Martin,M,0,0,36864,7.7417,NA,Q,Gallagher,Mr,adult
+705,0,3,Henrik Juul,M,1,0,350025,7.8542,NA,S,Hansen,Mr,adult
+706,0,2,"Henry Samuel (""Mr Henry Marshall"")",M,0,0,250655,26,NA,S,Morley,Mr,adult
+707,1,2,"Florence ""Fannie""",F,0,0,223596,13.5,NA,S,Kelly,Mrs,adult
+708,1,1,Edward Pennington,M,0,0,PC 17476,26.2875,E24,S,Calderhead,Mr,adult
+709,1,1,Alice,F,0,0,113781,151.55,NA,S,Cleaver,Miss,adult
+710,1,3,"Halim Gonios (""William George"")",M,1,1,2661,15.2458,NA,C,Moubarek,Master,child
+711,1,1,"Berthe Antonine (""Mrs de Villiers"")",F,0,0,PC 17482,49.5042,C90,C,Mayne,Mlle,adult
+712,0,1,Herman,M,0,0,113028,26.55,C124,S,Klaber,Mr,adult
+713,1,1,Elmer Zebley,M,1,0,19996,52,C126,S,Taylor,Mr,adult
+714,0,3,August Viktor,M,0,0,7545,9.4833,NA,S,Larsson,Mr,adult
+715,0,2,Samuel,M,0,0,250647,13,NA,S,Greenberg,Mr,adult
+716,0,3,Peter Andreas Lauritz Andersen,M,0,0,348124,7.65,F G73,S,Soholt,Mr,adult
+717,1,1,Caroline Louise,F,0,0,PC 17757,227.525,C45,C,Endres,Miss,adult
+718,1,2,"Edwina Celia ""Winnie""",F,0,0,34218,10.5,E101,S,Troutt,Miss,adult
+719,0,3,Michael,M,0,0,36568,15.5,NA,Q,McEvoy,Mr,adult
+720,0,3,Malkolm Joackim,M,0,0,347062,7.775,NA,S,Johnson,Mr,adult
+721,1,2,"Annie Jessie ""Nina""",F,0,1,248727,33,NA,S,Harper,Miss,child
+722,0,3,Svend Lauritz,M,1,0,350048,7.0542,NA,S,Jensen,Mr,adult
+723,0,2,William Henry,M,0,0,12233,13,NA,S,Gillespie,Mr,adult
+724,0,2,Henry Price,M,0,0,250643,13,NA,S,Hodges,Mr,adult
+725,1,1,Norman Campbell,M,1,0,113806,53.1,E8,S,Chambers,Mr,adult
+726,0,3,Luka,M,0,0,315094,8.6625,NA,S,Oreskovic,Mr,adult
+727,1,2,Peter Henry (Lillian Jefferys),F,3,0,31027,21,NA,S,Renouf,Mrs,adult
+728,1,3,Margareth,F,0,0,36866,7.7375,NA,Q,Mannion,Miss,adult
+729,0,2,Kurt Arnold Gottfrid,M,1,0,236853,26,NA,S,Bryhl,Mr,adult
+730,0,3,Pieta Sofia,F,1,0,STON/O2. 3101271,7.925,NA,S,Ilmakangas,Miss,adult
+731,1,1,Elisabeth Walton,F,0,0,24160,211.3375,B5,S,Allen,Miss,adult
+732,0,3,Houssein G N,M,0,0,2699,18.7875,NA,C,Hassan,Mr,child
+733,0,2,Robert J,M,0,0,239855,0,NA,S,Knight,Mr,adult
+734,0,2,William John,M,0,0,28425,13,NA,S,Berriman,Mr,adult
+735,0,2,Moses Aaron,M,0,0,233639,13,NA,S,Troupiansky,Mr,adult
+736,0,3,Leslie,M,0,0,54636,16.1,NA,S,Williams,Mr,adult
+737,0,3,Edward (Margaret Ann Watson),F,1,3,W./C. 6608,34.375,NA,S,Ford,Mrs,adult
+738,1,1,Gustave J,M,0,0,PC 17755,512.3292,B101,C,Lesurer,Mr,adult
+739,0,3,Kanio,M,0,0,349201,7.8958,NA,S,Ivanoff,Mr,adult
+740,0,3,Minko,M,0,0,349218,7.8958,NA,S,Nankoff,Mr,adult
+741,1,1,Walter James,M,0,0,16988,30,D45,S,Hawksford,Mr,adult
+742,0,1,Tyrell William,M,1,0,19877,78.85,C46,S,Cavendish,Mr,adult
+743,1,1,"Susan Parker ""Suzette""",F,2,2,PC 17608,262.375,B57 B59 B63 B66,C,Ryerson,Miss,adult
+744,0,3,Neal,M,1,0,376566,16.1,NA,S,McNamee,Mr,adult
+745,1,3,Juho,M,0,0,STON/O 2. 3101288,7.925,NA,S,Stranden,Mr,adult
+746,0,1,Edward Gifford,M,1,1,WE/P 5735,71,B22,S,Crosby,Capt,adult
+747,0,3,Rossmore Edward,M,1,1,C.A. 2673,20.25,NA,S,Abbott,Mr,adult
+748,1,2,Anna,F,0,0,250648,13,NA,S,Sinkkonen,Miss,adult
+749,0,1,Daniel Warner,M,1,0,113773,53.1,D30,S,Marvin,Mr,adult
+750,0,3,Michael,M,0,0,335097,7.75,NA,Q,Connaghton,Mr,adult
+751,1,2,Joan,F,1,1,29103,23,NA,S,Wells,Miss,child
+752,1,3,Meier,M,0,1,392096,12.475,E121,S,Moor,Master,child
+753,0,3,Johannes Joseph,M,0,0,345780,9.5,NA,S,Vande Velde,Mr,adult
+754,0,3,Lalio,M,0,0,349204,7.8958,NA,S,Jonkoff,Mr,adult
+755,1,2,Samuel (Jane Laver),F,1,2,220845,65,NA,S,Herman,Mrs,adult
+756,1,2,Viljo,M,1,1,250649,14.5,NA,S,Hamalainen,Master,child
+757,0,3,August Sigfrid,M,0,0,350042,7.7958,NA,S,Carlsson,Mr,adult
+758,0,2,Percy Andrew,M,0,0,29108,11.5,NA,S,Bailey,Mr,adult
+759,0,3,Thomas Leonard,M,0,0,363294,8.05,NA,S,Theobald,Mr,adult
+760,1,1,of (Lucy Noel Martha Dyer-Edwards),F,0,0,110152,86.5,B77,S,Rothes,the Countess,adult
+761,0,3,John,M,0,0,358585,14.5,NA,S,Garfirth,Mr,adult
+762,0,3,Iisakki Antino Aijo,M,0,0,SOTON/O2 3101272,7.125,NA,S,Nirva,Mr,adult
+763,1,3,Hanna Assi,M,0,0,2663,7.2292,NA,C,Barah,Mr,adult
+764,1,1,William Ernest (Lucile Polk),F,1,2,113760,120,B96 B98,S,Carter,Mrs,adult
+765,0,3,Hans Linus,M,0,0,347074,7.775,NA,S,Eklund,Mr,adult
+766,1,1,John C (Anna Andrews),F,1,0,13502,77.9583,D11,S,Hogeboom,Mrs,adult
+767,0,1,Arthur Jackson,M,0,0,112379,39.6,NA,C,Brewe,Dr,adult
+768,0,3,Mary,F,0,0,364850,7.75,NA,Q,Mangan,Miss,adult
+769,0,3,Daniel J,M,1,0,371110,24.15,NA,Q,Moran,Mr,adult
+770,0,3,Daniel Danielsen,M,0,0,8471,8.3625,NA,S,Gronnestad,Mr,adult
+771,0,3,Rene Aime,M,0,0,345781,9.5,NA,S,Lievens,Mr,adult
+772,0,3,Niels Peder,M,0,0,350047,7.8542,NA,S,Jensen,Mr,adult
+773,0,2,(Mary),F,0,0,S.O./P.P. 3,10.5,E77,S,Mack,Mrs,adult
+774,0,3,Dibo,M,0,0,2674,7.225,NA,C,Elias,Mr,adult
+775,1,2,Elizabeth (Eliza Needs),F,1,3,29105,23,NA,S,Hocking,Mrs,adult
+776,0,3,Pehr Fabian Oliver Malkolm,M,0,0,347078,7.75,NA,S,Myhrman,Mr,adult
+777,0,3,Roger,M,0,0,383121,7.75,F38,Q,Tobin,Mr,adult
+778,1,3,Virginia Ethel,F,0,0,364516,12.475,NA,S,Emanuel,Miss,child
+779,0,3,Thomas J,M,0,0,36865,7.7375,NA,Q,Kilgannon,Mr,adult
+780,1,1,Edward Scott (Elisabeth Walton McMillan),F,0,1,24160,211.3375,B3,S,Robert,Mrs,adult
+781,1,3,Banoura,F,0,0,2687,7.2292,NA,C,Ayoub,Miss,child
+782,1,1,Albert Adrian (Vera Gillespie),F,1,0,17474,57,B20,S,Dick,Mrs,adult
+783,0,1,Milton Clyde,M,0,0,113501,30,D6,S,Long,Mr,adult
+784,0,3,Andrew G,M,1,2,W./C. 6607,23.45,NA,S,Johnston,Mr,adult
+785,0,3,William,M,0,0,SOTON/O.Q. 3101312,7.05,NA,S,Ali,Mr,adult
+786,0,3,Abraham (David Lishin),M,0,0,374887,7.25,NA,S,Harmer,Mr,adult
+787,1,3,Anna Sofia,F,0,0,3101265,7.4958,NA,S,Sjoblom,Miss,adult
+788,0,3,George Hugh,M,4,1,382652,29.125,NA,Q,Rice,Master,child
+789,1,3,Bertram Vere,M,1,2,C.A. 2315,20.575,NA,S,Dean,Master,child
+790,0,1,Benjamin,M,0,0,PC 17593,79.2,B82 B84,C,Guggenheim,Mr,adult
+791,0,3,"Andrew ""Andy""",M,0,0,12460,7.75,NA,Q,Keane,Mr,adult
+792,0,2,Alfred,M,0,0,239865,26,NA,S,Gaskell,Mr,adult
+793,0,3,Stella Anna,F,8,2,CA. 2343,69.55,NA,S,Sage,Miss,child
+794,0,1,William Fisher,M,0,0,PC 17600,30.6958,NA,C,Hoyt,Mr,adult
+795,0,3,Ristiu,M,0,0,349203,7.8958,NA,S,Dantcheff,Mr,adult
+796,0,2,Richard,M,0,0,28213,13,NA,S,Otter,Mr,adult
+797,1,1,Alice (Farnham),F,0,0,17465,25.9292,D17,S,Leader,Dr,adult
+798,1,3,Mara,F,0,0,349244,8.6833,NA,S,Osman,Mrs,adult
+799,0,3,Yousseff,M,0,0,2685,7.2292,NA,C,Ibrahim Shawah,Mr,adult
+800,0,3,Jean Baptiste (Rosalie Paula Govaert),F,1,1,345773,24.15,NA,S,Van Impe,Mrs,adult
+801,0,2,Martin,M,0,0,250647,13,NA,S,Ponesell,Mr,adult
+802,1,2,Harvey (Charlotte Annie Tate),F,1,1,C.A. 31921,26.25,NA,S,Collyer,Mrs,adult
+803,1,1,William Thornton II,M,1,2,113760,120,B96 B98,S,Carter,Master,child
+804,1,3,Assad Alexander,M,0,1,2625,8.5167,NA,C,Thomas,Master,child
+805,1,3,Oskar Arvid,M,0,0,347089,6.975,NA,S,Hedman,Mr,adult
+806,0,3,Karl Johan,M,0,0,347063,7.775,NA,S,Johansson,Mr,adult
+807,0,1,Thomas Jr,M,0,0,112050,0,A36,S,Andrews,Mr,adult
+808,0,3,Ellen Natalia,F,0,0,347087,7.775,NA,S,Pettersson,Miss,adult
+809,0,2,August,M,0,0,248723,13,NA,S,Meyer,Mr,adult
+810,1,1,Norman Campbell (Bertha Griggs),F,1,0,113806,53.1,E8,S,Chambers,Mrs,adult
+811,0,3,William,M,0,0,3474,7.8875,NA,S,Alexander,Mr,adult
+812,0,3,James,M,0,0,A/4 48871,24.15,NA,S,Lester,Mr,adult
+813,0,2,Richard James,M,0,0,28206,10.5,NA,S,Slemen,Mr,adult
+814,0,3,Ebba Iris Alfrida,F,4,2,347082,31.275,NA,S,Andersson,Miss,child
+815,0,3,Ernest Portage,M,0,0,364499,8.05,NA,S,Tomlin,Mr,adult
+816,0,1,Richard,M,0,0,112058,0,B102,S,Fry,Mr,adult
+817,0,3,Wendla Maria,F,0,0,STON/O2. 3101290,7.925,NA,S,Heininen,Miss,adult
+818,0,2,Albert,M,1,1,S.C./PARIS 2079,37.0042,NA,C,Mallet,Mr,adult
+819,0,3,John Fredrik Alexander,M,0,0,C 7075,6.45,NA,S,Holm,Mr,adult
+820,0,3,Karl Thorsten,M,3,2,347088,27.9,NA,S,Skoog,Master,child
+821,1,1,Charles Melville (Clara Jennings Gregg),F,1,1,12749,93.5,B69,S,Hays,Mrs,adult
+822,1,3,Nikola,M,0,0,315098,8.6625,NA,S,Lulic,Mr,adult
+823,0,1,John George,M,0,0,19972,0,NA,S,Reuchlin,Jonkheer,adult
+824,1,3,(Beila),F,0,1,392096,12.475,E121,S,Moor,Mrs,adult
+825,0,3,Urho Abraham,M,4,1,3101295,39.6875,NA,S,Panula,Master,child
+826,0,3,John,M,0,0,368323,6.95,NA,Q,Flynn,Mr,adult
+827,0,3,Len,M,0,0,1601,56.4958,NA,S,Lam,Mr,adult
+828,1,2,Andre,M,0,2,S.C./PARIS 2079,37.0042,NA,C,Mallet,Master,child
+829,1,3,Thomas Joseph,M,0,0,367228,7.75,NA,Q,McCormack,Mr,adult
+830,1,1,George Nelson (Martha Evelyn),F,0,0,113572,80,B28,NA,Stone,Mrs,adult
+831,1,3,Antoni (Selini Alexander),F,1,0,2659,14.4542,NA,C,Yasbeck,Mrs,adult
+832,1,2,George Sibley,M,1,1,29106,18.75,NA,S,Richards,Master,child
+833,0,3,Amin,M,0,0,2671,7.2292,NA,C,Saad,Mr,adult
+834,0,3,Albert,M,0,0,347468,7.8542,NA,S,Augustsson,Mr,adult
+835,0,3,Owen George,M,0,0,2223,8.3,NA,S,Allum,Mr,adult
+836,1,1,Sara Rebecca,F,1,1,PC 17756,83.1583,E49,C,Compton,Miss,adult
+837,0,3,Jakob,M,0,0,315097,8.6625,NA,S,Pasic,Mr,adult
+838,0,3,Maurice,M,0,0,392092,8.05,NA,S,Sirota,Mr,adult
+839,1,3,Chang,M,0,0,1601,56.4958,NA,S,Chip,Mr,adult
+840,1,1,Pierre,M,0,0,11774,29.7,C47,C,Marechal,Mr,adult
+841,0,3,Ilmari Rudolf,M,0,0,SOTON/O2 3101287,7.925,NA,S,Alhomaki,Mr,adult
+842,0,2,Thomas Charles,M,0,0,S.O./P.P. 3,10.5,NA,S,Mudd,Mr,adult
+843,1,1,Augusta,F,0,0,113798,31,NA,C,Serepeca,Miss,adult
+844,0,3,Peter L,M,0,0,2683,6.4375,NA,C,Lemberopolous,Mr,adult
+845,0,3,Jeso,M,0,0,315090,8.6625,NA,S,Culumovic,Mr,adult
+846,0,3,Anthony,M,0,0,C.A. 5547,7.55,NA,S,Abbing,Mr,adult
+847,0,3,Douglas Bullen,M,8,2,CA. 2343,69.55,NA,S,Sage,Mr,adult
+848,0,3,Marin,M,0,0,349213,7.8958,NA,C,Markoff,Mr,adult
+849,0,2,John,M,0,1,248727,33,NA,S,Harper,Rev,adult
+850,1,1,Samuel L (Edwiga Grabowska),F,1,0,17453,89.1042,C92,C,Goldenberg,Mrs,adult
+851,0,3,Sigvard Harald Elias,M,4,2,347082,31.275,NA,S,Andersson,Master,child
+852,0,3,Johan,M,0,0,347060,7.775,NA,S,Svensson,Mr,adult
+853,0,3,Nourelain,F,1,1,2678,15.2458,NA,C,Boulos,Miss,child
+854,1,1,Mary Conover,F,0,1,PC 17592,39.4,D28,S,Lines,Miss,adult
+855,0,2,Ernest Courtenay (Lilian Hughes),F,1,0,244252,26,NA,S,Carter,Mrs,adult
+856,1,3,Sam (Leah Rosen),F,0,1,392091,9.35,NA,S,Aks,Mrs,adult
+857,1,1,George Dennick (Mary Hitchcock),F,1,1,36928,164.8667,NA,S,Wick,Mrs,adult
+858,1,1,Peter Denis,M,0,0,113055,26.55,E17,S,Daly,Mr,adult
+859,1,3,Solomon (Latifa Qurban),F,0,3,2666,19.2583,NA,C,Baclini,Mrs,adult
+860,0,3,Raihed,M,0,0,2629,7.2292,NA,C,Razi,Mr,adult
+861,0,3,Claus Peter,M,2,0,350026,14.1083,NA,S,Hansen,Mr,adult
+862,0,2,Frederick Edward,M,1,0,28134,11.5,NA,S,Giles,Mr,adult
+863,1,1,Frederick Joel (Margaret Welles Barron),F,0,0,17466,25.9292,D17,S,Swift,Mrs,adult
+864,0,3,"Dorothy Edith ""Dolly""",F,8,2,CA. 2343,69.55,NA,S,Sage,Miss,child
+865,0,2,John William,M,0,0,233866,13,NA,S,Gill,Mr,adult
+866,1,2,(Karolina),F,0,0,236852,13,NA,S,Bystrom,Mrs,adult
+867,1,2,Asuncion,F,1,0,SC/PARIS 2149,13.8583,NA,C,Duran y More,Miss,adult
+868,0,1,Washington Augustus II,M,0,0,PC 17590,50.4958,A24,S,Roebling,Mr,adult
+869,0,3,Philemon,M,0,0,345777,9.5,NA,S,van Melkebeke,Mr,adult
+870,1,3,Harold Theodor,M,1,1,347742,11.1333,NA,S,Johnson,Master,child
+871,0,3,Cerin,M,0,0,349248,7.8958,NA,S,Balkic,Mr,adult
+872,1,1,Richard Leonard (Sallie Monypeny),F,1,1,11751,52.5542,D35,S,Beckwith,Mrs,adult
+873,0,1,Frans Olof,M,0,0,695,5,B51 B53 B55,S,Carlsson,Mr,adult
+874,0,3,Victor,M,0,0,345765,9,NA,S,Vander Cruyssen,Mr,adult
+875,1,2,Samuel (Hannah Wizosky),F,1,0,P/PP 3381,24,NA,C,Abelson,Mrs,adult
+876,1,3,"Adele Kiamie ""Jane""",F,0,0,2667,7.225,NA,C,Najib,Miss,adult
+877,0,3,Alfred Ossian,M,0,0,7534,9.8458,NA,S,Gustafsson,Mr,adult
+878,0,3,Nedelio,M,0,0,349212,7.8958,NA,S,Petroff,Mr,adult
+879,0,3,Kristo,M,0,0,349217,7.8958,NA,S,Laleff,Mr,adult
+880,1,1,Thomas Jr (Lily Alexenia Wilson),F,0,1,11767,83.1583,C50,C,Potter,Mrs,adult
+881,1,2,William (Imanita Parrish Hall),F,0,1,230433,26,NA,S,Shelley,Mrs,adult
+882,0,3,Johann,M,0,0,349257,7.8958,NA,S,Markun,Mr,adult
+883,0,3,Gerda Ulrika,F,0,0,7552,10.5167,NA,S,Dahlberg,Miss,adult
+884,0,2,Frederick James,M,0,0,C.A./SOTON 34068,10.5,NA,S,Banfield,Mr,adult
+885,0,3,Henry Jr,M,0,0,SOTON/OQ 392076,7.05,NA,S,Sutehall,Mr,adult
+886,0,3,William (Margaret Norton),F,0,5,382652,29.125,NA,Q,Rice,Mrs,adult
+887,0,2,Juozas,M,0,0,211536,13,NA,S,Montvila,Rev,adult
+888,1,1,Margaret Edith,F,0,0,112053,30,B42,S,Graham,Miss,adult
+889,0,3,"Catherine Helen ""Carrie""",F,1,2,W./C. 6607,23.45,NA,S,Johnston,Miss,adult
+890,1,1,Karl Howell,M,0,0,111369,30,C148,C,Behr,Mr,adult
+891,0,3,Patrick,M,0,0,370376,7.75,NA,Q,Dooley,Mr,adult

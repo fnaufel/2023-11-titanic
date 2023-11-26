@@ -44,3 +44,28 @@ receita_pos_leitura <- function(df) {
   
 }
 
+
+# Aplicar receita ---------------------------------------------------------
+
+aplicar <- function(receita) {
+  
+  prep(
+    receita, 
+    verbose = TRUE,
+    retain = TRUE,
+    log_changes = TRUE,
+    strings_as_factors = FALSE
+  ) %>% 
+    bake(new_data = NULL)
+  
+}
+
+
+# Ler csv e aplicar receita -----------------------------------------------
+
+ler <- function(filename) {
+  
+  df <- read_csv(filename)
+  aplicar(receita_pos_leitura(df))
+
+}

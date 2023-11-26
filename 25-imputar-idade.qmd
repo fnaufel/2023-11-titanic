@@ -40,14 +40,7 @@ df <- read_csv('dados/both_limpo.csv') %>%
 ```
 
 ```{r}
-df <- receita_pos_leitura(df) %>% 
-  prep(
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE,
-    strings_as_factors = FALSE,
-  ) %>% 
-  bake(new_data = NULL)
+df <- aplicar(receita_pos_leitura(df))
 ```
 
 ```{r}
@@ -330,27 +323,24 @@ tudo_faixas %>% accuracy(truth = faixa, estimate = faixa_pred)
 Treino:
 
 ```{r}
-df_train <- read_csv('dados/train_limpo.csv') %>% 
-  receita_pos_leitura() %>% 
-  prep(
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE,
-    strings_as_factors = FALSE,
-  ) %>% 
-  bake(new_data = NULL)
+df_train_orig <- read_csv('dados/train_limpo.csv') 
+df_train_orig_com_idade <- df_train_orig %>% filter(!is.na(age))
+df_train_orig_sem_idade <- df_train_orig %>% filter(is.na(age))
 
-df_train_com_idade <- df_train %>% filter(!is.na(age))
-df_train_sem_idade <- df_train %>% filter(is.na(age)) %>% select(-age)
+df_train_preproc <- aplicar(receita_pos_leitura(df_train_orig))
+df_train_preproc_sem_idade <- 
+  df_train_preproc %>% 
+  filter(is.na(age)) %>% 
+  select(-age)
 ```
 
 ```{r}
 previsoes_train_sem_idade <- wf_fit_tudo %>% 
-  predict(df_train_sem_idade)
+  predict(df_train_preproc_sem_idade)
 ```
 
 ```{r}
-idades_imputadas <- df_train_sem_idade %>% 
+idades_imputadas <- df_train_preproc_sem_idade %>% 
   bind_cols(previsoes_train_sem_idade) %>% 
   mutate(
     age = .pred,
@@ -362,7 +352,7 @@ idades_imputadas <- df_train_sem_idade %>%
 Adicionar faixa a quem já tem idade:
 
 ```{r}
-df_train_com_faixa <- df_train_com_idade %>% 
+df_train_com_faixa <- df_train_orig_com_idade %>% 
   mutate(
     faixa = calcular_faixa(age)
   ) %>% 
@@ -372,7 +362,8 @@ df_train_com_faixa <- df_train_com_idade %>%
 Gravar:
 
 ```{r}
-df_train_sem_idade %>% 
+df_train_orig_sem_idade %>% 
+  select(-age) %>% 
   left_join(idades_imputadas, by = 'id') %>% 
   bind_rows(df_train_com_faixa) %>% 
   arrange(id) %>% 
@@ -384,15 +375,7 @@ df_train_sem_idade %>%
 Ler e resumir:
 
 ```{r}
-read_csv('dados/train_faixas_imputadas.csv') %>% 
-  receita_pos_leitura() %>% 
-  prep(
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE,
-    strings_as_factors = FALSE,
-  ) %>% 
-  bake(new_data = NULL) %>% 
+ler('dados/train_faixas_imputadas.csv') %>% 
   dfSummary() %>% print(method = 'render')
 ```
 
@@ -401,27 +384,24 @@ read_csv('dados/train_faixas_imputadas.csv') %>%
 Teste:
 
 ```{r}
-df_test <- read_csv('dados/test_limpo.csv') %>% 
-  receita_pos_leitura() %>% 
-  prep(
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE,
-    strings_as_factors = FALSE,
-  ) %>% 
-  bake(new_data = NULL)
+df_test_orig <- read_csv('dados/test_limpo.csv') 
+df_test_orig_com_idade <- df_test_orig %>% filter(!is.na(age))
+df_test_orig_sem_idade <- df_test_orig %>% filter(is.na(age))
 
-df_test_com_idade <- df_test %>% filter(!is.na(age))
-df_test_sem_idade <- df_test %>% filter(is.na(age)) %>% select(-age)
+df_test_preproc <- aplicar(receita_pos_leitura(df_test_orig))
+df_test_preproc_sem_idade <- 
+  df_test_preproc %>% 
+  filter(is.na(age)) %>% 
+  select(-age)
 ```
 
 ```{r}
 previsoes_test_sem_idade <- wf_fit_tudo %>% 
-  predict(df_test_sem_idade)
+  predict(df_test_preproc_sem_idade)
 ```
 
 ```{r}
-idades_imputadas <- df_test_sem_idade %>% 
+idades_imputadas <- df_test_preproc_sem_idade %>% 
   bind_cols(previsoes_test_sem_idade) %>% 
   mutate(
     age = .pred,
@@ -433,7 +413,7 @@ idades_imputadas <- df_test_sem_idade %>%
 Adicionar faixa a quem já tem idade:
 
 ```{r}
-df_test_com_faixa <- df_test_com_idade %>% 
+df_test_com_faixa <- df_test_orig_com_idade %>% 
   mutate(
     faixa = calcular_faixa(age)
   ) %>% 
@@ -443,7 +423,8 @@ df_test_com_faixa <- df_test_com_idade %>%
 Gravar:
 
 ```{r}
-df_test_sem_idade %>% 
+df_test_orig_sem_idade %>% 
+  select(-age) %>% 
   left_join(idades_imputadas, by = 'id') %>% 
   bind_rows(df_test_com_faixa) %>% 
   arrange(id) %>% 
@@ -455,25 +436,8 @@ df_test_sem_idade %>%
 Ler e resumir:
 
 ```{r}
-read_csv('dados/test_faixas_imputadas.csv') %>% 
-  receita_pos_leitura() %>% 
-  prep(
-    verbose = TRUE,
-    retain = TRUE,
-    log_changes = TRUE,
-    strings_as_factors = FALSE,
-  ) %>% 
-  bake(new_data = NULL) %>% 
+ler('dados/test_faixas_imputadas.csv') %>% 
   dfSummary() %>% print(method = 'render')
 ```
 
 
-::: {.callout-important}
-
-## Por que name e title estão NA?
-
-Porque a receita pós-leitura espera a coluna name original e não espera title nem family.
-
-Para gravar, usar os dfs lidos originais, antes da receita.
-
-:::

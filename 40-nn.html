@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26/11/2023 20:50</p>
+      <p class="date">26/11/2023 21:04</p>
     </div>
   </div>
   
@@ -190,23 +190,23 @@ dbl (6): id, survived, pclass, sib_sp, par_ch, fare
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>oper 1 step mutate [training] 
-step_mutate (mutate_PbK8J): same number of columns
+step_mutate (mutate_mxR3j): same number of columns
 
 oper 2 step mutate [training] 
-step_mutate (mutate_vRfyI): 
+step_mutate (mutate_2ujiH): 
  new (2): family, title
 
 oper 3 step mutate [training] 
-step_mutate (mutate_aupNv): same number of columns
+step_mutate (mutate_U3fbJ): same number of columns
 
 oper 4 step mutate [training] 
-step_mutate (mutate_IJLXc): same number of columns
+step_mutate (mutate_QXXDv): same number of columns
 
 oper 5 step mutate [training] 
-step_mutate (mutate_sPIQ4): same number of columns
+step_mutate (mutate_cDj1t): same number of columns
 
 oper 6 step mutate [training] 
-step_mutate (mutate_jMtlh): same number of columns
+step_mutate (mutate_KfWJJ): same number of columns
 
 The retained training set is ~ 0,22 Mb  in memory.</code></pre>
 </div>
@@ -228,23 +228,23 @@ dbl (5): id, pclass, sib_sp, par_ch, fare
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>oper 1 step mutate [training] 
-step_mutate (mutate_VNLFN): same number of columns
+step_mutate (mutate_ctNRn): same number of columns
 
 oper 2 step mutate [training] 
-step_mutate (mutate_70LH0): 
+step_mutate (mutate_JcLcR): 
  new (2): family, title
 
 oper 3 step mutate [training] 
-step_mutate (mutate_YVmwI): same number of columns
+step_mutate (mutate_9UG1P): same number of columns
 
 oper 4 step mutate [training] 
-step_mutate (mutate_hiIZ0): same number of columns
+step_mutate (mutate_kCGuG): same number of columns
 
 oper 5 step mutate [training] 
-step_mutate (mutate_6gh5k): same number of columns
+step_mutate (mutate_lP2Nr): same number of columns
 
 oper 6 step mutate [training] 
-step_mutate (mutate_VEq2l): same number of columns
+step_mutate (mutate_7Kl6Q): same number of columns
 
 The retained training set is ~ 0,11 Mb  in memory.</code></pre>
 </div>
@@ -307,25 +307,22 @@ The retained training set is ~ 0,11 Mb  in memory.</code></pre>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    pclass, sex, embarked, faixa, title</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(sib_sp, par_ch) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># step_normalize(sib_sp, par_ch) %&gt;% </span></span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_rm</span>(ticket, fare, cabin, family)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_treino_nn <span class="ot">&lt;-</span> <span class="fu">aplicar</span>(receita)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>oper 1 step impute mode [training] 
-step_impute_mode (impute_mode_njMUj): same number of columns
+step_impute_mode (impute_mode_GRor1): same number of columns
 
 oper 2 step dummy [training] 
-step_dummy (dummy_8iUbE): 
+step_dummy (dummy_tpQZy): 
  new (23): pclass_1, pclass_2, sex_F, embarked_C, embarked_Q, faixa_child, ...
  removed (5): pclass, sex, embarked, faixa, title
 
-oper 3 step normalize [training] 
-step_normalize (normalize_LtG4e): same number of columns
-
-oper 4 step rm [training] 
-step_rm (rm_iR0Px): 
+oper 3 step rm [training] 
+step_rm (rm_aIPKN): 
  removed (4): ticket, fare, cabin, family
 
 The retained training set is ~ 0,19 Mb  in memory.</code></pre>
@@ -335,18 +332,15 @@ The retained training set is ~ 0,19 Mb  in memory.</code></pre>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_teste_nn <span class="ot">&lt;-</span> <span class="fu">aplicar</span>(receita, df_teste)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>oper 1 step impute mode [training] 
-step_impute_mode (impute_mode_njMUj): same number of columns
+step_impute_mode (impute_mode_GRor1): same number of columns
 
 oper 2 step dummy [training] 
-step_dummy (dummy_8iUbE): 
+step_dummy (dummy_tpQZy): 
  new (23): pclass_1, pclass_2, sex_F, embarked_C, embarked_Q, faixa_child, ...
  removed (5): pclass, sex, embarked, faixa, title
 
-oper 3 step normalize [training] 
-step_normalize (normalize_LtG4e): same number of columns
-
-oper 4 step rm [training] 
-step_rm (rm_iR0Px): 
+oper 3 step rm [training] 
+step_rm (rm_aIPKN): 
  removed (4): ticket, fare, cabin, family
 
 The retained training set is ~ 0,07 Mb  in memory.</code></pre>
@@ -400,8 +394,8 @@ The retained training set is ~ 0,07 Mb  in memory.</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Final epoch (plot to see history):
-    loss: 0,3063
-accuracy: 0,8696 </code></pre>
+    loss: 0,2906
+accuracy: 0,8801 </code></pre>
 </div>
 </div>
 </section>
@@ -420,12 +414,12 @@ accuracy: 0,8696 </code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>avaliacao <span class="ot">&lt;-</span> <span class="fu">evaluate</span>(rede, x_teste, y_teste)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>7/7 - 0s - loss: 0.7170 - accuracy: 0.8125 - 184ms/epoch - 26ms/step</code></pre>
+<pre><code>7/7 - 0s - loss: 0.7524 - accuracy: 0.7857 - 184ms/epoch - 26ms/step</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>avaliacao</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     loss  accuracy 
-0,7169518 0,8125000 </code></pre>
+0,7524424 0,7857143 </code></pre>
 </div>
 </div>
 </section>
@@ -435,18 +429,15 @@ accuracy: 0,8696 </code></pre>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_prever_nn <span class="ot">&lt;-</span> <span class="fu">aplicar</span>(receita, df_prever)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>oper 1 step impute mode [training] 
-step_impute_mode (impute_mode_njMUj): same number of columns
+step_impute_mode (impute_mode_GRor1): same number of columns
 
 oper 2 step dummy [training] 
-step_dummy (dummy_8iUbE): 
+step_dummy (dummy_tpQZy): 
  new (23): pclass_1, pclass_2, sex_F, embarked_S, embarked_C, faixa_child, ...
  removed (5): pclass, sex, embarked, faixa, title
 
-oper 3 step normalize [training] 
-step_normalize (normalize_LtG4e): same number of columns
-
-oper 4 step rm [training] 
-step_rm (rm_iR0Px): 
+oper 3 step rm [training] 
+step_rm (rm_aIPKN): 
  removed (4): ticket, fare, cabin, family
 
 The retained training set is ~ 0,12 Mb  in memory.</code></pre>
@@ -460,14 +451,14 @@ The retained training set is ~ 0,12 Mb  in memory.</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>previsoes <span class="ot">&lt;-</span> <span class="fu">predict</span>(rede, x_prever)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>14/14 - 0s - 118ms/epoch - 8ms/step</code></pre>
+<pre><code>14/14 - 0s - 120ms/epoch - 9ms/step</code></pre>
 </div>
 </div>
 </section>
 <section id="montar-submissão" class="level1">
 <h1>Montar submissão</h1>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>limite <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>limite <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df_prever <span class="sc">%&gt;%</span> </span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">PassengerId =</span> id) <span class="sc">%&gt;%</span> </span>

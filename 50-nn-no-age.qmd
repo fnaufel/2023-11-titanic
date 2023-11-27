@@ -1,5 +1,5 @@
 ---
-title: "Titanic competition: keras"
+title: "Titanic competition: keras disregarding age"
 author: "Fernando Náufel"
 date: now
 date-format: "DD/MM/YYYY HH:mm"
@@ -102,17 +102,17 @@ df_teste <- testing(split)
 ```{r}
 receita <- recipe(df_treino) %>% 
   update_role(
-    pclass, sex, sib_sp, par_ch, embarked, faixa, title, 
+    pclass, sex, sib_sp, par_ch, embarked, title, 
     new_role = 'predictor'
   ) %>% 
   update_role(survived, new_role = 'outcome') %>% 
   update_role(id, name, new_role = 'id') %>% 
   step_impute_mode(embarked) %>% 
   step_dummy(
-    pclass, sex, embarked, faixa, title
+    pclass, sex, embarked, title
   ) %>% 
-  # step_normalize(sib_sp, par_ch) %>% 
-  step_rm(ticket, fare, cabin, family)
+  step_normalize(sib_sp, par_ch) %>% 
+  step_rm(ticket, fare, cabin, family, faixa)
 ```
 
 ```{r}
@@ -144,7 +144,7 @@ library(keras)
 ```
 
 ```{r}
-rede <- keras_model_sequential(input_shape = 25) %>%
+rede <- keras_model_sequential(input_shape = 24) %>%
   layer_dense(200, activation = 'relu') %>%
   layer_dense(100, activation = 'relu') %>%
   layer_dense(50, activation = 'relu') %>%
@@ -223,4 +223,6 @@ df_prever %>%
   mutate(Survived = if_else(previsoes < limite, 0, 1)) %>% 
   write_csv('dados/2023-11-26-keras.csv')
 ```
+
+
 
